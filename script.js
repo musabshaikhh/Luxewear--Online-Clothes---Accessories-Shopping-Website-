@@ -15,7 +15,7 @@ function toggleMenu(){
   const nav=document.getElementById("navLinks");
   const menuIcon=document.getElementById("menuIcon");
   const closeIcon=document.getElementById("closeIcon");
-  if(nav){
+  if(nav){  
     nav.classList.toggle("active");
     document.body.classList.toggle("menu-open", nav.classList.contains("active"));
   }
