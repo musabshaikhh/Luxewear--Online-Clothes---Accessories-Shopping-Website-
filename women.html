@@ -15,9 +15,19 @@
       href="https://cdn-icons-png.flaticon.com/512/6645/6645261.png"
       type="image/x-icon"
     />
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js"></script>
+    <!-- Google Auth -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <!-- PayPal -->
+    <script src="https://www.paypal.com/sdk/js?client-id=AWJ5xajOFwkTtTG8sImSpqrZVRNUY1YN5vTFsPcMDrxp-L7-bCjm2uNqCEY2zMvZrVZx1LAI7HgXEVIp"></script>
   </head>
 
   <body>
+    <!-- ================= NOTIFICATION SYSTEM ================= -->
+    <div class="notification-container" id="notificationContainer"></div>
+
     <!-- ================= NAVBAR ================= -->
     <nav class="navbar">
       <a href="index.html" class="logo">
@@ -77,7 +87,10 @@
           <button
             type="button"
             class="nav-menu-icon-item"
-            onclick="toggleMenu()"
+            onclick="
+              toggleMenu();
+              toggleFavorites();
+            "
           >
             <span class="material-symbols-outlined">favorite</span>
             <span>Favorites</span>
@@ -127,7 +140,12 @@
             </button>
           </div>
         </div>
-        <span class="material-symbols-outlined nav-icon">favorite</span>
+        <span
+          class="material-symbols-outlined nav-icon"
+          onclick="toggleFavorites()"
+          title="Favorites"
+          >favorite</span
+        >
 
         <div class="cart-icon" onclick="toggleCart()">
           <span class="material-symbols-outlined nav-icon">shopping_bag</span>
@@ -214,7 +232,16 @@
           data-name="Floral Midi Dress"
           data-price="79.99"
           data-image="https://images.unsplash.com/photo-1616313253719-c46514cddee1?q=80&w=387&auto=format&fit=crop"
+          data-description="Beautiful floral midi dress with elegant pattern. Perfect for casual outings or special occasions, featuring breathable fabric and flattering cut."
+          onclick="openProductDetail(this)"
         >
+          <button
+            class="product-favorite-btn"
+            onclick="addProductToFavorites(this)"
+            aria-label="Add to favorites"
+          >
+            <span class="material-symbols-outlined">favorite</span>
+          </button>
           <img
             src="https://images.unsplash.com/photo-1616313253719-c46514cddee1?q=80&w=387&auto=format&fit=crop"
             alt="Floral Midi Dress"
@@ -242,7 +269,16 @@
           data-name="Casual Day Dress"
           data-price="59.99"
           data-image="https://images.unsplash.com/photo-1767785829347-cc13bd969514?q=80&w=387&auto=format&fit=crop"
+          data-description="Comfortable casual day dress designed for everyday wear. Soft, breathable fabric with a simple yet stylish design perfect for work or leisure."
+          onclick="openProductDetail(this)"
         >
+          <button
+            class="product-favorite-btn"
+            onclick="addProductToFavorites(this)"
+            aria-label="Add to favorites"
+          >
+            <span class="material-symbols-outlined">favorite</span>
+          </button>
           <img
             src="https://images.unsplash.com/photo-1767785829347-cc13bd969514?q=80&w=387&auto=format&fit=crop"
             alt="Casual Day Dress"
@@ -270,7 +306,16 @@
           data-name="Elegant Evening Dress"
           data-price="149.99"
           data-image="https://images.unsplash.com/photo-1734944688807-d44969bac7c5?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          data-description="Sophisticated evening dress for formal occasions. Crafted from premium fabric with elegant details, perfect for gala events and special celebrations."
+          onclick="openProductDetail(this)"
         >
+          <button
+            class="product-favorite-btn"
+            onclick="addProductToFavorites(this)"
+            aria-label="Add to favorites"
+          >
+            <span class="material-symbols-outlined">favorite</span>
+          </button>
           <img
             src="https://images.unsplash.com/photo-1734944688807-d44969bac7c5?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
             alt="Elegant Evening Dress"
@@ -298,7 +343,16 @@
           data-name="Summer Maxi Dress"
           data-price="69.99"
           data-image="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?q=80&w=464&auto=format&fit=crop"
+          data-description="Flowing summer maxi dress ideal for warm weather. Light and airy with a comfortable fit, perfect for beach days or casual summer outings."
+          onclick="openProductDetail(this)"
         >
+          <button
+            class="product-favorite-btn"
+            onclick="addProductToFavorites(this)"
+            aria-label="Add to favorites"
+          >
+            <span class="material-symbols-outlined">favorite</span>
+          </button>
           <img
             src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?q=80&w=464&auto=format&fit=crop"
             alt="Summer Maxi Dress"
@@ -326,7 +380,16 @@
           data-name="Wrap Dress"
           data-price="64.99"
           data-image="https://images.unsplash.com/photo-1734944688814-84e2c89c48a7?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          data-description="Classic wrap dress with adjustable waist tie. Versatile style that flatters all body types, easy to dress up or down for any occasion."
+          onclick="openProductDetail(this)"
         >
+          <button
+            class="product-favorite-btn"
+            onclick="addProductToFavorites(this)"
+            aria-label="Add to favorites"
+          >
+            <span class="material-symbols-outlined">favorite</span>
+          </button>
           <img
             src="https://images.unsplash.com/photo-1734944688814-84e2c89c48a7?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
             alt="Wrap Dress"
@@ -354,7 +417,16 @@
           data-name="Casual Shift Dress"
           data-price="54.99"
           data-image="https://images.unsplash.com/photo-1763559019748-a68819927eda?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          data-description="Effortless casual shift dress with relaxed silhouette. Perfect for everyday comfort with a modern, minimalist design."
+          onclick="openProductDetail(this)"
         >
+          <button
+            class="product-favorite-btn"
+            onclick="addProductToFavorites(this)"
+            aria-label="Add to favorites"
+          >
+            <span class="material-symbols-outlined">favorite</span>
+          </button>
           <img
             src="https://images.unsplash.com/photo-1763559019748-a68819927eda?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
             alt="Casual Shift Dress"
@@ -421,6 +493,169 @@
       <div class="footer-bottom">© 2024 LuxeWear. All Rights Reserved.</div>
     </footer>
 
+    <!-- ================= PRODUCT DETAIL MODAL ================= -->
+    <div
+      class="product-detail-overlay"
+      id="productDetailOverlay"
+      onclick="closeProductDetail()"
+    ></div>
+    <div class="product-detail-modal" id="productDetailModal">
+      <div class="product-detail-content">
+        <button
+          class="product-detail-close"
+          onclick="closeProductDetail()"
+          aria-label="Close"
+        >
+          <span class="material-symbols-outlined">close</span>
+        </button>
+
+        <div class="product-detail-container">
+          <!-- Product Image -->
+          <div class="product-detail-image">
+            <img id="detailProductImage" src="" alt="Product" />
+          </div>
+
+          <!-- Product Info -->
+          <div class="product-detail-info">
+            <h2 id="detailProductName">Product Name</h2>
+
+            <div class="detail-rating">
+              <div class="detail-stars" id="detailRating">
+                <span class="material-symbols-outlined">star</span>
+                <span class="material-symbols-outlined">star</span>
+                <span class="material-symbols-outlined">star</span>
+                <span class="material-symbols-outlined">star</span>
+                <span class="material-symbols-outlined">star</span>
+              </div>
+              <span class="detail-review-count" id="detailReviewCount"
+                >(0 reviews)</span
+              >
+            </div>
+
+            <p class="detail-price" id="detailProductPrice">$0.00</p>
+
+            <p class="detail-description" id="detailDescription">
+              Premium quality product with excellent craftsmanship and
+              materials.
+            </p>
+
+            <!-- Product Options -->
+            <div class="detail-options">
+              <div class="form-group">
+                <label for="detailSize">Size</label>
+                <select id="detailSize">
+                  <option>S</option>
+                  <option>M</option>
+                  <option>L</option>
+                  <option>XL</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="detailQuantity">Quantity</label>
+                <div class="qty-control">
+                  <button type="button" onclick="decreaseDetailQty()">−</button>
+                  <input type="number" id="detailQuantity" value="1" min="1" />
+                  <button type="button" onclick="increaseDetailQty()">+</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Actions -->
+            <div class="detail-actions">
+              <button class="primary-btn" onclick="addDetailProductToCart()">
+                Add to Cart
+              </button>
+              <button
+                class="primary-btn"
+                onclick="buyDetailProduct()"
+                style="background: #dc2626"
+              >
+                Buy Now
+              </button>
+              <button
+                class="secondary-btn"
+                onclick="toggleDetailFavorite()"
+                id="favBtn"
+              >
+                <span class="material-symbols-outlined">favorite</span>
+                Add to Favorites
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Reviews Section -->
+        <div class="product-detail-reviews">
+          <h3>Reviews & Ratings</h3>
+
+          <!-- Write Review Form -->
+          <div class="write-review">
+            <h4>Leave a Review</h4>
+            <form
+              id="reviewForm"
+              onsubmit="
+                submitReview(event);
+                return false;
+              "
+              class="auth-form"
+            >
+              <div class="form-group">
+                <label>Rating</label>
+                <div class="rating-input" id="ratingInput">
+                  <button type="button" class="star-btn" onclick="setRating(1)">
+                    ★
+                  </button>
+                  <button type="button" class="star-btn" onclick="setRating(2)">
+                    ★
+                  </button>
+                  <button type="button" class="star-btn" onclick="setRating(3)">
+                    ★
+                  </button>
+                  <button type="button" class="star-btn" onclick="setRating(4)">
+                    ★
+                  </button>
+                  <button type="button" class="star-btn" onclick="setRating(5)">
+                    ★
+                  </button>
+                </div>
+                <input type="hidden" id="selectedRating" value="0" />
+              </div>
+
+              <div class="form-group">
+                <label for="reviewName">Name</label>
+                <input
+                  type="text"
+                  id="reviewName"
+                  placeholder="Your name"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="reviewComment">Review</label>
+                <textarea
+                  id="reviewComment"
+                  placeholder="Share your experience..."
+                  rows="4"
+                  required
+                ></textarea>
+              </div>
+
+              <button type="submit" class="primary-btn">Submit Review</button>
+            </form>
+          </div>
+
+          <!-- Reviews List -->
+          <div class="reviews-list" id="reviewsList">
+            <!-- Reviews rendered by JS -->
+          </div>
+          <div class="no-reviews" id="noReviews">
+            No reviews yet. Be the first to review!
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- ================= CART SIDEBAR ================= -->
     <div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
     <aside class="cart-sidebar" id="cartSidebar">
@@ -443,9 +678,376 @@
           <span>Subtotal</span>
           <span id="cartSubtotal">$0.00</span>
         </div>
-        <button class="primary-btn cart-checkout-btn">Checkout</button>
+        <button class="primary-btn cart-checkout-btn" onclick="openCheckout()">
+          Checkout
+        </button>
       </div>
     </aside>
+
+    <!-- ================= FAVORITES SIDEBAR ================= -->
+    <div
+      class="favorites-overlay"
+      id="favoritesOverlay"
+      onclick="closeFavorites()"
+    ></div>
+    <aside class="favorites-sidebar" id="favoritesSidebar">
+      <div class="favorites-sidebar-header">
+        <h2>My Favorites</h2>
+        <button
+          class="favorites-close"
+          onclick="closeFavorites()"
+          aria-label="Close favorites"
+        >
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+      <div class="favorites-items" id="favoritesItems">
+        <!-- Favorites items rendered by JS -->
+      </div>
+      <div class="favorites-empty" id="favoritesEmpty">
+        No favorites yet. Start adding your favorites!
+      </div>
+    </aside>
+
+    <!-- ================= CHECKOUT MODAL ================= -->
+    <div
+      class="checkout-overlay"
+      id="checkoutOverlay"
+      onclick="closeCheckout()"
+    ></div>
+    <div class="checkout-modal" id="checkoutModal">
+      <div class="checkout-modal-content">
+        <button
+          class="checkout-close"
+          onclick="closeCheckout()"
+          aria-label="Close"
+        >
+          <span class="material-symbols-outlined">close</span>
+        </button>
+        <h2>Checkout</h2>
+
+        <div class="checkout-sections">
+          <!-- Order Summary -->
+          <div class="checkout-section">
+            <h3>Order Summary</h3>
+            <div class="checkout-items" id="checkoutItems">
+              <!-- Items populated by JS -->
+            </div>
+            <div class="checkout-summary">
+              <div class="summary-row">
+                <span>Subtotal</span>
+                <span id="checkoutSubtotal">$0.00</span>
+              </div>
+              <div class="summary-row">
+                <span>Shipping</span>
+                <span id="checkoutShipping">$10.00</span>
+              </div>
+              <div class="summary-row total">
+                <span>Total</span>
+                <span id="checkoutTotal">$10.00</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Shipping Address -->
+          <div class="checkout-section">
+            <h3>Shipping Address</h3>
+            <form id="shippingForm" class="auth-form">
+              <div class="form-group">
+                <label for="shippingName">Full Name</label>
+                <input
+                  type="text"
+                  id="shippingName"
+                  placeholder="John Doe"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="shippingEmail">Email</label>
+                <input
+                  type="email"
+                  id="shippingEmail"
+                  placeholder="your@email.com"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="shippingPhone">Phone</label>
+                <input
+                  type="tel"
+                  id="shippingPhone"
+                  placeholder="+1 (555) 000-0000"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="shippingAddress">Street Address</label>
+                <input
+                  type="text"
+                  id="shippingAddress"
+                  placeholder="123 Main Street"
+                  required
+                />
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="shippingCity">City</label>
+                  <input
+                    type="text"
+                    id="shippingCity"
+                    placeholder="New York"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="shippingState">State/Province</label>
+                  <input
+                    type="text"
+                    id="shippingState"
+                    placeholder="NY"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="shippingZip">ZIP/Postal Code</label>
+                  <input
+                    type="text"
+                    id="shippingZip"
+                    placeholder="10001"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="shippingCountry">Country</label>
+                  <input
+                    type="text"
+                    id="shippingCountry"
+                    placeholder="United States"
+                    required
+                  />
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <!-- Payment -->
+          <div class="checkout-section">
+            <h3>Payment Method</h3>
+            <div id="paypal-button-container" style="margin-top: 20px"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= AUTH MODAL ================= -->
+    <div class="auth-overlay" id="authOverlay" onclick="closeAuth()"></div>
+    <div class="auth-modal" id="authModal">
+      <div class="auth-modal-content">
+        <button class="auth-close" onclick="closeAuth()" aria-label="Close">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+
+        <!-- LOGIN TAB -->
+        <div class="auth-tab-content" id="loginTab">
+          <h2>Login</h2>
+          <form
+            class="auth-form"
+            onsubmit="
+              handleLogin(event);
+              return false;
+            "
+          >
+            <div class="form-group">
+              <label for="loginEmail">Email</label>
+              <input
+                type="email"
+                id="loginEmail"
+                placeholder="your@email.com"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="loginPassword">Password</label>
+              <input
+                type="password"
+                id="loginPassword"
+                placeholder="Enter password"
+                required
+              />
+            </div>
+            <button type="submit" class="primary-btn auth-btn">Login</button>
+            <div class="divider">
+              <span>OR</span>
+            </div>
+            <button
+              type="button"
+              class="google-btn"
+              onclick="signInWithGoogle()"
+            >
+              <span class="material-symbols-outlined">language</span>
+              Continue with Google
+            </button>
+            <p class="auth-toggle-text">
+              Don't have an account?
+              <a
+                href="#"
+                onclick="
+                  switchAuthTab('signup');
+                  return false;
+                "
+                >Sign Up</a
+              >
+            </p>
+          </form>
+        </div>
+
+        <!-- SIGNUP TAB -->
+        <div class="auth-tab-content hidden" id="signupTab">
+          <h2>Create Account</h2>
+          <form
+            class="auth-form"
+            onsubmit="
+              handleSignup(event);
+              return false;
+            "
+          >
+            <div class="form-group">
+              <label for="signupName">Full Name</label>
+              <input
+                type="text"
+                id="signupName"
+                placeholder="John Doe"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="signupEmail">Email</label>
+              <input
+                type="email"
+                id="signupEmail"
+                placeholder="your@email.com"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="signupPassword">Password</label>
+              <input
+                type="password"
+                id="signupPassword"
+                placeholder="Enter password"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="signupConfirm">Confirm Password</label>
+              <input
+                type="password"
+                id="signupConfirm"
+                placeholder="Confirm password"
+                required
+              />
+            </div>
+            <button type="submit" class="primary-btn auth-btn">Sign Up</button>
+            <div class="divider">
+              <span>OR</span>
+            </div>
+            <button
+              type="button"
+              class="google-btn"
+              onclick="signInWithGoogle()"
+            >
+              <span class="material-symbols-outlined">language</span>
+              Continue with Google
+            </button>
+            <p class="auth-toggle-text">
+              Already have an account?
+              <a
+                href="#"
+                onclick="
+                  switchAuthTab('login');
+                  return false;
+                "
+                >Login</a
+              >
+            </p>
+          </form>
+        </div>
+
+        <!-- PROFILE TAB -->
+        <div class="auth-tab-content hidden" id="profileTab">
+          <h2>My Profile</h2>
+          <div class="profile-info" id="profileInfo">
+            <div class="profile-item">
+              <span class="profile-label">Name:</span>
+              <span class="profile-value" id="profileName">Not logged in</span>
+            </div>
+            <div class="profile-item">
+              <span class="profile-label">Email:</span>
+              <span class="profile-value" id="profileEmail">Not logged in</span>
+            </div>
+          </div>
+          <div class="profile-actions">
+            <button class="secondary-btn" onclick="openSettings()">
+              Settings
+            </button>
+            <button class="secondary-btn" onclick="handleLogout()">
+              Logout
+            </button>
+          </div>
+        </div>
+
+        <!-- SETTINGS TAB -->
+        <div class="auth-tab-content hidden" id="settingsTab">
+          <h2>Settings</h2>
+          <form
+            class="auth-form"
+            onsubmit="
+              handleSettings(event);
+              return false;
+            "
+          >
+            <div class="form-group">
+              <label for="settingsName">Full Name</label>
+              <input type="text" id="settingsName" placeholder="John Doe" />
+            </div>
+            <div class="form-group">
+              <label for="settingsEmail">Email</label>
+              <input
+                type="email"
+                id="settingsEmail"
+                placeholder="your@email.com"
+              />
+            </div>
+            <div class="form-group">
+              <label for="settingsPhone">Phone</label>
+              <input
+                type="tel"
+                id="settingsPhone"
+                placeholder="+1 (555) 000-0000"
+              />
+            </div>
+            <div class="form-group checkbox">
+              <input type="checkbox" id="settingsNotifications" checked />
+              <label for="settingsNotifications"
+                >Receive email notifications</label
+              >
+            </div>
+            <button type="submit" class="primary-btn auth-btn">
+              Save Changes
+            </button>
+            <button
+              type="button"
+              class="secondary-btn auth-btn"
+              onclick="switchAuthTab('profile')"
+            >
+              Back to Profile
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
 
     <script src="script.js"></script>
   </body>
