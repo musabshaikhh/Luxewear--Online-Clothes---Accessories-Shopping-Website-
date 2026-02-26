@@ -208,7 +208,7 @@ function getShopItemById(id) {
 function searchShopItems(query) {
   const results = [];
   const lowerQuery = query.toLowerCase();
-  
+
   for (const category in shopItems) {
     shopItems[category].forEach(item => {
       if (
@@ -220,7 +220,7 @@ function searchShopItems(query) {
       }
     });
   }
-  
+
   return results;
 }
 
@@ -233,7 +233,7 @@ function filterShopItemsByPrice(category, minPrice, maxPrice) {
 // Function to sort items
 function sortShopItems(items, sortBy = 'name') {
   const sorted = [...items];
-  
+
   switch (sortBy) {
     case 'price-low':
       sorted.sort((a, b) => a.price - b.price);
@@ -248,6 +248,15 @@ function sortShopItems(items, sortBy = 'name') {
     default:
       sorted.sort((a, b) => a.name.localeCompare(b.name));
   }
-  
+
   return sorted;
 }
+
+export {
+  shopItems,
+  getShopItems,
+  getShopItemById,
+  searchShopItems,
+  filterShopItemsByPrice,
+  sortShopItems
+};

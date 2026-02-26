@@ -1,3 +1,6 @@
+import { getShopItems, getShopItemById, filterShopItemsByPrice, sortShopItems, searchShopItems, shopItems } from './shop-items.js';
+import { initFavoriteButtons } from './products.js';
+
 // ================= SHOP PRODUCTS RENDERING =================
 // This file contains functions to render products dynamically in HTML
 
@@ -29,14 +32,14 @@ function renderProductGrid(items, containerId = 'productGrid') {
  */
 function createProductCardHTML(item) {
   return `
-    <div class="product-card reveal" 
-      data-id="${item.id}" 
-      data-name="${item.name}" 
+    <div class="product-card reveal"
+      data-id="${item.id}"
+      data-name="${item.name}"
       data-price="${item.price}"
       data-image="${item.image}"
       data-description="${item.description}"
       onclick="openProductDetail(this)">
-      <button class="product-favorite-btn" onclick="addProductToFavorites(this)" aria-label="Add to favorites">
+      <button class="product-favorite-btn" onclick="event.stopPropagation(); addProductToFavorites(this)" aria-label="Add to favorites">
         <span class="material-symbols-outlined">favorite</span>
       </button>
       <img src="${item.image}" alt="${item.name}" />
@@ -48,8 +51,8 @@ function createProductCardHTML(item) {
           <span class="product-review-count">(${item.reviews})</span>
         </div>
         <div class="product-actions">
-          <button type="button" class="btn-add-cart" onclick="addProductToCart(this)">Add to cart</button>
-          <button type="button" class="btn-buy" onclick="buyProduct(this)">Buy</button>
+          <button type="button" class="btn-add-cart" onclick="event.stopPropagation(); addProductToCart(this)">Add to cart</button>
+          <button type="button" class="btn-buy" onclick="event.stopPropagation(); buyProduct(this)">Buy</button>
         </div>
       </div>
     </div>
@@ -158,7 +161,7 @@ function createProductListItemHTML(item) {
 function renderCategoryProducts(category, containerId = 'categoryProducts') {
   const items = getShopItems(category);
   const container = document.getElementById(containerId);
-  
+
   if (!container) return;
 
   const categoryTitle = category.charAt(0).toUpperCase() + category.slice(1);
@@ -369,8 +372,8 @@ function renderRelatedProducts(productId, containerId = 'relatedProducts', limit
   if (relatedItems.length < limit) {
     for (const category in shopItems) {
       const priceRangeItems = shopItems[category].filter(
-        item => 
-          Math.abs(item.price - currentItem.price) < 50 && 
+        item =>
+          Math.abs(item.price - currentItem.price) < 50 &&
           item.id !== productId &&
           !relatedItems.find(r => r.id === item.id)
       );
@@ -401,3 +404,20 @@ function renderRelatedProducts(productId, containerId = 'relatedProducts', limit
 function initializeShop(category = 'men', containerId = 'productGrid') {
   renderCategoryProducts(category, containerId);
 }
+
+export {
+  renderProductGrid,
+  createProductCardHTML,
+  createStarsHTML,
+  renderFeaturedProducts,
+  renderProductList,
+  createProductListItemHTML,
+  renderCategoryProducts,
+  renderFilteredProducts,
+  renderSearchResults,
+  renderProductDetails,
+  renderProductComparison,
+  renderQuickView,
+  renderRelatedProducts,
+  initializeShop
+};

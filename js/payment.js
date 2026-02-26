@@ -1,3 +1,7 @@
+import { getCart, saveCart, updateCartCount, renderCart } from './cart.js';
+import { getUser } from './auth.js';
+import { showNotification } from './utils.js';
+
 // ================= CHECKOUT MODAL =================
 function openCheckout() {
   const cart = getCart();
@@ -112,7 +116,7 @@ function loadPayPalButton() {
     const container = document.getElementById('paypal-button-container');
     if (container) {
       container.innerHTML = `
-        <button class="primary-btn" style="width:100%; padding:12px;" onclick="handleDemoPayment()">
+        <button class="primary-btn" style="width:100%; padding:12px;" onclick="window.handleDemoPayment()">
           Complete Order with PayPal (Demo)
         </button>
       `;
@@ -215,3 +219,12 @@ function handleDemoPayment() {
   closeCheckout();
   showNotification('Order Confirmed', 'Your order has been placed successfully! Order ID: ' + order.id, 'success', 8000);
 }
+
+export {
+  openCheckout,
+  closeCheckout,
+  renderCheckout,
+  loadPayPalButton,
+  handlePaymentSuccess,
+  handleDemoPayment
+};

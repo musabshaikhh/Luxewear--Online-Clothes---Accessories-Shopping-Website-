@@ -1,6 +1,11 @@
+import { addToCart } from './cart.js';
+import { getFavorites, saveFavorites } from './favorites.js';
+import { renderProductReviews, updateProductRatings } from './reviews.js';
+import { showNotification } from './utils.js';
+
 // ================= PRODUCT DETAIL MODAL =================
-let currentDetailProductId = null;
-let selectedRating = 0;
+window.currentDetailProductId = null;
+window.selectedRating = 0;
 
 function openProductDetail(element) {
   const id = element.dataset.id;
@@ -9,8 +14,8 @@ function openProductDetail(element) {
   const image = element.dataset.image;
   const description = element.dataset.description || 'Premium quality product with excellent craftsmanship and materials.';
 
-  currentDetailProductId = id;
-  selectedRating = 0;
+  window.currentDetailProductId = id;
+  window.selectedRating = 0;
 
   document.getElementById('detailProductImage').src = image;
   document.getElementById('detailProductName').textContent = name;
@@ -43,7 +48,7 @@ function closeProductDetail() {
   if (overlay) overlay.classList.remove('open');
   if (modal) modal.classList.remove('open');
   document.body.style.overflow = '';
-  currentDetailProductId = null;
+  window.currentDetailProductId = null;
 }
 
 function increaseDetailQty() {
@@ -59,7 +64,7 @@ function decreaseDetailQty() {
 }
 
 function addDetailProductToCart() {
-  if (!currentDetailProductId) return;
+  if (!window.currentDetailProductId) return;
 
   const detailName = document.getElementById('detailProductName').textContent;
   const detailPrice = parseFloat(document.getElementById('detailProductPrice').textContent.replace('$', ''));
@@ -67,7 +72,7 @@ function addDetailProductToCart() {
   const qty = parseInt(document.getElementById('detailQuantity').value);
 
   const item = {
-    id: currentDetailProductId,
+    id: window.currentDetailProductId,
     name: detailName,
     price: detailPrice,
     image: detailImage,
@@ -75,24 +80,23 @@ function addDetailProductToCart() {
   };
 
   addToCart(item);
-  showNotification('Added to Cart', `${detailName} x${qty} added to your cart`, 'success');
   closeProductDetail();
 }
 
 function buyDetailProduct() {
   addDetailProductToCart();
-  setTimeout(() => openCheckout(), 300);
+  setTimeout(() => window.openCheckout(), 300);
 }
 
 function toggleDetailFavorite() {
-  if (!currentDetailProductId) return;
+  if (!window.currentDetailProductId) return;
 
   const detailName = document.getElementById('detailProductName').textContent;
   const detailPrice = parseFloat(document.getElementById('detailProductPrice').textContent.replace('$', ''));
   const detailImage = document.getElementById('detailProductImage').src;
 
   const favorites = getFavorites();
-  const existingIndex = favorites.findIndex(f => f.id === currentDetailProductId);
+  const existingIndex = favorites.findIndex(f => f.id === window.currentDetailProductId);
 
   if (existingIndex > -1) {
     favorites.splice(existingIndex, 1);
@@ -100,7 +104,7 @@ function toggleDetailFavorite() {
     updateFavButton(false);
   } else {
     favorites.push({
-      id: currentDetailProductId,
+      id: window.currentDetailProductId,
       name: detailName,
       price: detailPrice,
       image: detailImage
@@ -137,3 +141,15 @@ function initFavoriteButtons() {
     }
   });
 }
+
+export {
+  openProductDetail,
+  closeProductDetail,
+  increaseDetailQty,
+  decreaseDetailQty,
+  addDetailProductToCart,
+  buyDetailProduct,
+  toggleDetailFavorite,
+  updateFavButton,
+  initFavoriteButtons
+};

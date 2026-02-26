@@ -1,3 +1,5 @@
+import { showNotification } from './utils.js';
+
 // ================= FAVORITES SIDEBAR =================
 const FAVORITES_KEY = 'luxewear_favorites';
 
@@ -59,7 +61,7 @@ function renderFavorites() {
         <div class="favorite-item-name">${item.name || 'Product'}</div>
         <div class="favorite-item-price">$${(item.price || 0).toFixed(2)}</div>
       </div>
-      <button type="button" class="favorite-item-remove" onclick="removeFromFavorites(${index})" aria-label="Remove from favorites">
+      <button type="button" class="favorite-item-remove" onclick="window.removeFromFavorites(${index})" aria-label="Remove from favorites">
         <span class="material-symbols-outlined">delete</span>
       </button>
     `;
@@ -89,7 +91,7 @@ function addToFavorites(item) {
 }
 
 function addProductToFavorites(btn) {
-  btn.stopPropagation ? btn.stopPropagation() : (event.cancelBubble = true);
+  event.stopPropagation();
   const card = btn.closest('.product-card');
   if (!card) return;
 
@@ -118,3 +120,15 @@ function addProductToFavorites(btn) {
 
   saveFavorites(favorites);
 }
+
+export {
+  getFavorites,
+  saveFavorites,
+  openFavorites,
+  closeFavorites,
+  toggleFavorites,
+  renderFavorites,
+  removeFromFavorites,
+  addToFavorites,
+  addProductToFavorites
+};

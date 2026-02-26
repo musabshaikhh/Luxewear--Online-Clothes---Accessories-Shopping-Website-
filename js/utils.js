@@ -40,3 +40,5 @@ function showNotification(title, message, type = 'info', duration = 5000) {
     }, duration);
   }
 }
+
+export { showNotification, revealOnScroll };

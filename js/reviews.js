@@ -1,3 +1,5 @@
+import { showNotification } from './utils.js';
+
 // ================= REVIEWS =================
 const REVIEWS_KEY = 'luxewear_reviews';
 
@@ -21,7 +23,7 @@ function saveReviews(productId, reviews) {
 }
 
 function setRating(rating) {
-  selectedRating = rating;
+  window.selectedRating = rating;
   document.getElementById('selectedRating').value = rating;
   updateRatingStars(rating);
 }
@@ -40,12 +42,12 @@ function updateRatingStars(rating) {
 function submitReview(event) {
   event.preventDefault();
 
-  if (!currentDetailProductId) {
+  if (!window.currentDetailProductId) {
     showNotification('Error', 'Product not found', 'error');
     return;
   }
 
-  if (selectedRating === 0) {
+  if (!window.selectedRating || window.selectedRating === 0) {
     showNotification('Error', 'Please select a rating', 'error');
     return;
   }
@@ -61,22 +63,22 @@ function submitReview(event) {
   const review = {
     id: 'review-' + Date.now(),
     name: name,
-    rating: selectedRating,
+    rating: window.selectedRating,
     comment: comment,
     date: new Date().toISOString()
   };
 
-  const reviews = getProductReviews(currentDetailProductId);
+  const reviews = getProductReviews(window.currentDetailProductId);
   reviews.push(review);
-  saveReviews(currentDetailProductId, reviews);
+  saveReviews(window.currentDetailProductId, reviews);
 
   document.getElementById('reviewForm').reset();
-  selectedRating = 0;
+  window.selectedRating = 0;
   document.getElementById('selectedRating').value = 0;
   updateRatingStars(0);
 
-  renderProductReviews(currentDetailProductId);
-  updateProductRatings(currentDetailProductId);
+  renderProductReviews(window.currentDetailProductId);
+  updateProductRatings(window.currentDetailProductId);
 
   showNotification('Success', 'Review submitted successfully!', 'success');
 }
@@ -115,7 +117,7 @@ function renderProductReviews(productId) {
           <span class="review-name">${review.name}</span>
           <span class="review-date">${dateStr}</span>
         </div>
-        <button class="review-delete-btn" onclick="deleteReview('${productId}', '${review.id}')" title="Delete review" aria-label="Delete review">
+        <button class="review-delete-btn" onclick="window.deleteReview('${productId}', '${review.id}')" title="Delete review" aria-label="Delete review">
           <span class="material-symbols-outlined">delete</span>
         </button>
       </div>
@@ -164,3 +166,14 @@ function updateProductRatings(productId) {
   document.getElementById('detailRating').innerHTML = starsHtml;
   document.getElementById('detailReviewCount').textContent = `(${reviews.length} reviews)`;
 }
+
+export {
+  getProductReviews,
+  saveReviews,
+  setRating,
+  updateRatingStars,
+  submitReview,
+  renderProductReviews,
+  deleteReview,
+  updateProductRatings
+};

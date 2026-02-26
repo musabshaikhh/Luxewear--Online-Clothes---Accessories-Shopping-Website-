@@ -10,7 +10,7 @@ const firebaseConfig = {
 
 let firebaseInitialized = false;
 try {
-  if (!firebase) {
+  if (typeof firebase === 'undefined') {
     console.warn('Firebase not loaded');
   } else {
     firebase.initializeApp(firebaseConfig);
@@ -19,3 +19,5 @@ try {
 } catch(e) {
   console.warn('Firebase initialization skipped:', e.message);
 }
+
+export { firebaseInitialized, firebaseConfig };

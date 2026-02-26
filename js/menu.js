@@ -15,3 +15,5 @@ document.addEventListener("click", function(e) {
   const nav = document.getElementById("navLinks");
   if (nav && nav.classList.contains("active") && e.target.closest(".nav-links a")) toggleMenu();
 });
+
+export { toggleMenu };
