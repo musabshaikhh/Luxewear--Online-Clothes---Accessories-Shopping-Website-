@@ -1,3 +1,5 @@
+import { showNotification } from './utils.js';
+
 // ================= CART SIDEBAR =================
 const CART_KEY = 'luxewear_cart';
 
@@ -74,12 +76,12 @@ function renderCart() {
         <div class="cart-item-name">${item.name || 'Product'}</div>
         <div class="cart-item-price">$${price.toFixed(2)}</div>
         <div class="cart-item-qty">
-          <button type="button" onclick="cartUpdateQty(${index}, -1)">−</button>
+          <button type="button" onclick="window.cartUpdateQty(${index}, -1)">−</button>
           <span>${qty}</span>
-          <button type="button" onclick="cartUpdateQty(${index}, 1)">+</button>
+          <button type="button" onclick="window.cartUpdateQty(${index}, 1)">+</button>
         </div>
       </div>
-      <button type="button" class="cart-item-remove" onclick="removeFromCart(${index})" aria-label="Remove">
+      <button type="button" class="cart-item-remove" onclick="window.removeFromCart(${index})" aria-label="Remove">
         <span class="material-symbols-outlined">delete</span>
       </button>
     `;
@@ -111,6 +113,7 @@ function addToCart(item) {
   else cart.push({ ...item, qty: item.qty || 1, selected: true });
   saveCart(cart);
   renderCart();
+  showNotification('Added to Cart', `${item.name} added to your cart`, 'success');
 }
 
 function getSelectedCart() {
@@ -137,6 +140,7 @@ function cartSelectAll(selectAll) {
 }
 
 function addProductToCart(btn) {
+  event.stopPropagation();
   const card = btn.closest('.product-card');
   if (!card) return;
   const item = {
@@ -149,6 +153,25 @@ function addProductToCart(btn) {
 }
 
 function buyProduct(btn) {
+  event.stopPropagation();
   addProductToCart(btn);
   openCart();
 }
+
+export {
+  getCart,
+  saveCart,
+  openCart,
+  closeCart,
+  toggleCart,
+  updateCartCount,
+  renderCart,
+  cartUpdateQty,
+  removeFromCart,
+  addToCart,
+  getSelectedCart,
+  cartToggleSelect,
+  cartSelectAll,
+  addProductToCart,
+  buyProduct
+};

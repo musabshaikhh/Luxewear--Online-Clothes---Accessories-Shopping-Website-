@@ -1,5 +1,70 @@
 // ================= MAIN ENTRY POINT =================
 
+// Import all modules
+import { showNotification, revealOnScroll } from './utils.js';
+import {
+  getCart,
+  saveCart,
+  openCart,
+  closeCart,
+  toggleCart,
+  updateCartCount,
+  renderCart,
+  cartUpdateQty,
+  removeFromCart,
+  addToCart,
+  addProductToCart,
+  buyProduct
+} from './cart.js';
+import {
+  getFavorites,
+  saveFavorites,
+  openFavorites,
+  closeFavorites,
+  toggleFavorites,
+  renderFavorites,
+  removeFromFavorites,
+  addProductToFavorites
+} from './favorites.js';
+import {
+  getUser,
+  saveUser,
+  clearUser,
+  openAuth,
+  closeAuth,
+  switchAuthTab,
+  handleLogin,
+  handleSignup,
+  handleLogout,
+  updateProfileDisplay,
+  openSettings,
+  handleSettings,
+  signInWithGoogle
+} from './auth.js';
+import {
+  openCheckout,
+  closeCheckout,
+  handleDemoPayment
+} from './payment.js';
+import {
+  openProductDetail,
+  closeProductDetail,
+  increaseDetailQty,
+  decreaseDetailQty,
+  addDetailProductToCart,
+  buyDetailProduct,
+  toggleDetailFavorite,
+  initFavoriteButtons
+} from './products.js';
+import {
+  setRating,
+  submitReview,
+  deleteReview,
+  updateRatingStars
+} from './reviews.js';
+import { toggleMenu } from './menu.js';
+import { toggleSearch, syncSearchInputs, clearSearchMobile, handleSearch } from './search.js';
+
 // Expose all functions to window scope for inline onclick handlers
 window.toggleMenu = toggleMenu;
 window.toggleSearch = toggleSearch;
@@ -40,6 +105,17 @@ window.toggleDetailFavorite = toggleDetailFavorite;
 window.setRating = setRating;
 window.submitReview = submitReview;
 window.deleteReview = deleteReview;
+
+// Expose additional functions that might be needed
+window.getCart = getCart;
+window.saveCart = saveCart;
+window.getFavorites = getFavorites;
+window.saveFavorites = saveFavorites;
+window.getUser = getUser;
+window.saveUser = saveUser;
+window.showNotification = showNotification;
+window.updateRatingStars = updateRatingStars;
+window.initFavoriteButtons = initFavoriteButtons;
 
 // Document-level event listeners for closing modals on overlay click
 document.addEventListener('click', function(e) {

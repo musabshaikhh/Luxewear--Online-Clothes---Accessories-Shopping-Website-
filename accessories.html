@@ -409,23 +409,15 @@
     </div>
   </div>
 
-  <script src="js/firebase-config.js" defer></script>
-  <script src="js/utils.js" defer></script>
-  <script src="js/menu.js" defer></script>
-  <script src="js/search.js" defer></script>
-  <script src="js/cart.js" defer></script>
-  <script src="js/favorites.js" defer></script>
-  <script src="js/auth.js" defer></script>
-  <script src="js/payment.js" defer></script>
-  <script src="js/reviews.js" defer></script>
-  <script src="js/products.js" defer></script>
-  <script src="js/shop-items.js" defer></script>
-  <script src="js/shop-products.js" defer></script>
-  <script>
+  <!-- Scripts - Load as ES6 module -->
+  <script type="module" src="js/shop-items.js"></script>
+  <script type="module" src="js/shop-products.js"></script>
+  <script type="module">
+    import { renderCategoryProducts } from './js/shop-products.js';
     document.addEventListener('DOMContentLoaded', function() {
       renderCategoryProducts('accessories', 'productGrid');
     });
   </script>
-  <script src="js/main.js" defer></script>
+  <script type="module" src="js/main.js"></script>
 </body>
 </html>

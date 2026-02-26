@@ -1,3 +1,5 @@
+import { showNotification } from './utils.js';
+
 // ================= AUTH MODAL =================
 const USER_KEY = 'luxewear_user';
 
@@ -161,7 +163,7 @@ function handleSettings(event) {
 function signInWithGoogle() {
   showNotification('Authenticating', 'Signing in with Google...', 'info', 2000);
 
-  if (firebaseInitialized && firebase && firebase.auth) {
+  if (typeof firebaseInitialized !== 'undefined' && firebaseInitialized && typeof firebase !== 'undefined' && firebase.auth) {
     const provider = new firebase.auth.GoogleAuthProvider();
     firebase.auth().signInWithPopup(provider)
       .then(result => {
@@ -197,3 +199,19 @@ function signInWithGoogle() {
     closeAuth();
   }
 }
+
+export {
+  getUser,
+  saveUser,
+  clearUser,
+  openAuth,
+  closeAuth,
+  switchAuthTab,
+  handleLogin,
+  handleSignup,
+  handleLogout,
+  updateProfileDisplay,
+  openSettings,
+  handleSettings,
+  signInWithGoogle
+};
