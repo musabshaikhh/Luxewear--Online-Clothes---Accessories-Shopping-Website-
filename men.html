@@ -4,42 +4,26 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Men's Collection | LuxeWear</title>
-
-    <link
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     <link rel="stylesheet" href="style.css" />
-    <link
-      rel="shortcut icon"
-      href="https://cdn-icons-png.flaticon.com/512/6645/6645261.png"
-      type="image/x-icon"
-    />
-    <!-- Firebase -->
+    <link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/512/6645/6645261.png" type="image/x-icon" />
     <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js"></script>
-    <!-- Google Auth -->
     <script src="https://accounts.google.com/gsi/client" async defer></script>
-    <!-- PayPal -->
     <script src="https://www.paypal.com/sdk/js?client-id=AWJ5xajOFwkTtTG8sImSpqrZVRNUY1YN5vTFsPcMDrxp-L7-bCjm2uNqCEY2zMvZrVZx1LAI7HgXEVIp"></script>
   </head>
-
   <body>
-    <!-- ================= NOTIFICATION SYSTEM ================= -->
+    <!-- Notifications -->
     <div class="notification-container" id="notificationContainer"></div>
 
-    <!-- ================= NAVBAR ================= -->
+    <!-- Navbar -->
     <nav class="navbar">
       <a href="index.html" class="logo">
         <span class="material-symbols-outlined logo-shirt">checkroom</span>
         <span>LuxeWear</span>
       </a>
 
-      <button
-        class="menu-toggle"
-        onclick="toggleMenu()"
-        aria-label="Toggle menu"
-      >
+      <button class="menu-toggle" onclick="toggleMenu()" aria-label="Toggle menu">
         <span class="material-symbols-outlined" id="menuIcon">menu</span>
         <span class="material-symbols-outlined" id="closeIcon">close</span>
       </button>
@@ -51,58 +35,24 @@
         <li><a href="accessories.html">Accessories</a></li>
         <li class="nav-search-mobile">
           <div class="nav-search-inner">
-            <input
-              type="text"
-              class="search-input-mobile"
-              id="searchInputMobile"
-              placeholder="Search..."
-              oninput="
-                handleSearch(this.value);
-                syncSearchInputs(this.value);
-              "
-            />
-            <button
-              type="button"
-              class="search-close-mobile"
-              onclick="clearSearchMobile()"
-              aria-label="Close search"
-            >
+            <input type="text" class="search-input-mobile" id="searchInputMobile" placeholder="Search..."
+              oninput="handleSearch(this.value); syncSearchInputs(this.value)" />
+            <button type="button" class="search-close-mobile" onclick="clearSearchMobile()" aria-label="Close search">
               <span class="material-symbols-outlined">close</span>
             </button>
           </div>
         </li>
         <li class="nav-menu-icons">
-          <button
-            type="button"
-            class="nav-menu-icon-item"
-            onclick="
-              toggleMenu();
-              toggleCart();
-            "
-          >
+          <button type="button" class="nav-menu-icon-item" onclick="toggleMenu(); toggleCart()">
             <span class="material-symbols-outlined">shopping_bag</span>
             <span>Cart</span>
             <span class="cart-count">0</span>
           </button>
-          <button
-            type="button"
-            class="nav-menu-icon-item"
-            onclick="
-              toggleMenu();
-              toggleFavorites();
-            "
-          >
+          <button type="button" class="nav-menu-icon-item" onclick="toggleMenu(); toggleFavorites()">
             <span class="material-symbols-outlined">favorite</span>
             <span>Favorites</span>
           </button>
-          <button
-            type="button"
-            class="nav-menu-icon-item"
-            onclick="
-              toggleMenu();
-              openAuth();
-            "
-          >
+          <button type="button" class="nav-menu-icon-item" onclick="toggleMenu(); openAuth()">
             <span class="material-symbols-outlined">person</span>
             <span>Profile</span>
           </button>
@@ -111,163 +61,83 @@
 
       <div class="nav-icons">
         <div class="search-wrap">
-          <button
-            class="search-toggle"
-            type="button"
-            onclick="toggleSearch()"
-            aria-label="Search"
-          >
+          <button class="search-toggle" type="button" onclick="toggleSearch()" aria-label="Search">
             <span class="material-symbols-outlined">search</span>
           </button>
           <div class="search-box">
-            <span class="material-symbols-outlined search-icon-inside"
-              >search</span
-            >
-            <input
-              type="text"
-              class="search-input"
-              id="searchInput"
-              placeholder="Search..."
-              oninput="handleSearch(this.value)"
-            />
-            <button
-              class="search-close"
-              type="button"
-              onclick="toggleSearch()"
-              aria-label="Close search"
-            >
+            <span class="material-symbols-outlined search-icon-inside">search</span>
+            <input type="text" class="search-input" id="searchInput" placeholder="Search..." oninput="handleSearch(this.value)" />
+            <button class="search-close" type="button" onclick="toggleSearch()" aria-label="Close search">
               <span class="material-symbols-outlined">close</span>
             </button>
           </div>
         </div>
-        <span
-          class="material-symbols-outlined nav-icon"
-          onclick="toggleFavorites()"
-          title="Favorites"
-          >favorite</span
-        >
-
+        <span class="material-symbols-outlined nav-icon" onclick="toggleFavorites()" title="Favorites">favorite</span>
         <div class="cart-icon" onclick="toggleCart()">
           <span class="material-symbols-outlined nav-icon">shopping_bag</span>
           <span class="cart-count" id="cartCount">0</span>
         </div>
-
-        <span class="material-symbols-outlined nav-icon" onclick="openAuth()"
-          >person</span
-        >
+        <span class="material-symbols-outlined nav-icon" onclick="openAuth()">person</span>
       </div>
     </nav>
 
-    <!-- ================= HERO ================= -->
+    <!-- Hero -->
     <section class="hero reveal">
       <div class="hero-slider">
-        <div
-          class="slide active"
-          style="
-            background-image: url(&quot;https://images.unsplash.com/photo-1596755094514-f87e34085b2c?q=80&w=464&auto=format&fit=crop&quot;);
-          "
-        ></div>
-        <div
-          class="slide"
-          style="
-            background-image: url(&quot;https://images.unsplash.com/photo-1516257984-b1b4d707412e?q=80&w=2070&auto=format&fit=crop&quot;);
-          "
-        ></div>
-        <div
-          class="slide"
-          style="
-            background-image: url(&quot;https://images.unsplash.com/photo-1617137968427-85924c800a22?q=80&w=2070&auto=format&fit=crop&quot;);
-          "
-        ></div>
+        <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1596755094514-f87e34085b2c?q=80&w=464&auto=format&fit=crop')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1516257984-b1b4d707412e?q=80&w=2070&auto=format&fit=crop')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1617137968427-85924c800a22?q=80&w=2070&auto=format&fit=crop')"></div>
       </div>
-
       <div class="hero-content">
         <h1>Men's Collection</h1>
         <p>Premium jackets, shirts & essentials crafted for confidence.</p>
-        <button class="primary-btn">Shop Men</button>
+        <button class="btn btn-primary">Shop Men</button>
       </div>
     </section>
 
-    <!-- ================= MEN'S FASHION GRID ================= -->
+    <!-- Categories -->
     <section class="section reveal">
       <h2 class="section-title">Men's Fashion</h2>
-      <div class="search-no-results" id="searchNoResults">
-        No results found.
-      </div>
+      <div class="search-no-results" id="searchNoResults">No results found.</div>
 
       <div class="category-grid">
         <div class="category-card">
-          <a href="#">
-            <img
-              src="https://images.unsplash.com/photo-1551028719-00167b16eac5?q=80&w=464&auto=format&fit=crop"
-              alt="Men's jacket"
-            />
-          </a>
+          <a href="#"><img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?q=80&w=464&auto=format&fit=crop" alt="Jackets" /></a>
           <div class="category-info">
             <h3>Jackets & Coats</h3>
             <p>Structured blazers and premium outerwear for every season.</p>
           </div>
         </div>
-
         <div class="category-card">
-          <a href="#">
-            <img
-              src="https://images.unsplash.com/photo-1596755094514-f87e34085b2c?q=80&w=464&auto=format&fit=crop"
-              alt="Men's shirt"
-            />
-          </a>
+          <a href="#"><img src="https://images.unsplash.com/photo-1596755094514-f87e34085b2c?q=80&w=464&auto=format&fit=crop" alt="Shirts" /></a>
           <div class="category-info">
             <h3>Shirts</h3>
             <p>Classic and modern shirts from casual to formal.</p>
           </div>
         </div>
-
         <div class="category-card">
-          <a href="#">
-            <img
-              src="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?q=80&w=464&auto=format&fit=crop"
-              alt="Men's t-shirt"
-            />
-          </a>
+          <a href="#"><img src="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?q=80&w=464&auto=format&fit=crop" alt="T-Shirts" /></a>
           <div class="category-info">
             <h3>T-Shirts & Tees</h3>
             <p>Soft cotton and premium basics for everyday wear.</p>
           </div>
         </div>
-
         <div class="category-card">
-          <a href="#">
-            <img
-              src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=464&auto=format&fit=crop"
-              alt="Men's formal wear"
-            />
-          </a>
+          <a href="#"><img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=464&auto=format&fit=crop" alt="Formal" /></a>
           <div class="category-info">
             <h3>Formal Wear</h3>
             <p>Suits and tailored pieces for the modern professional.</p>
           </div>
         </div>
-
         <div class="category-card">
-          <a href="#">
-            <img
-              src="https://images.unsplash.com/photo-1594938298603-c8148c4dae35?q=80&w=464&auto=format&fit=crop"
-              alt="Men's casual"
-            />
-          </a>
+          <a href="#"><img src="https://images.unsplash.com/photo-1594938298603-c8148c4dae35?q=80&w=464&auto=format&fit=crop" alt="Casual" /></a>
           <div class="category-info">
             <h3>Casual</h3>
             <p>Relaxed fits and weekend-ready styles.</p>
           </div>
         </div>
-
         <div class="category-card">
-          <a href="#">
-            <img
-              src="https://images.unsplash.com/photo-1617127365659-c47fa864d8bc?q=80&w=464&auto=format&fit=crop"
-              alt="Men's streetwear"
-            />
-          </a>
+          <a href="#"><img src="https://images.unsplash.com/photo-1617127365659-c47fa864d8bc?q=80&w=464&auto=format&fit=crop" alt="Streetwear" /></a>
           <div class="category-info">
             <h3>Streetwear</h3>
             <p>Bold statement pieces and urban essentials.</p>
@@ -275,245 +145,126 @@
         </div>
       </div>
 
-      <!-- ================= MEN'S PRODUCTS ================= -->
+      <!-- Products -->
       <h2 class="section-title">Shop Men</h2>
       <div class="product-grid">
-        <div
-          class="product-card reveal"
-          data-id="men-1"
-          data-name="Classic Cotton T-Shirt"
-          data-price="29.99"
+        <div class="product-card reveal" data-id="men-1" data-name="Classic Cotton T-Shirt" data-price="29.99"
           data-image="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?q=80&w=464&auto=format&fit=crop"
           data-description="Premium classic cotton t-shirt made with 100% high-quality cotton. Perfect for everyday wear with a comfortable fit and durable fabric."
-          onclick="openProductDetail(this)"
-        >
-          <button
-            class="product-favorite-btn"
-            onclick="addProductToFavorites(this)"
-            aria-label="Add to favorites"
-          >
+          onclick="openProductDetail(this)">
+          <button class="product-favorite-btn" onclick="addProductToFavorites(this)" aria-label="Add to favorites">
             <span class="material-symbols-outlined">favorite</span>
           </button>
-          <img
-            src="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?q=80&w=464&auto=format&fit=crop"
-            alt="Classic Cotton T-Shirt"
-          />
+          <img src="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?q=80&w=464&auto=format&fit=crop" alt="Classic Cotton T-Shirt" />
           <div class="product-info">
             <h3>Classic Cotton T-Shirt</h3>
             <p class="product-price">$29.99</p>
             <div class="product-actions">
-              <button
-                type="button"
-                class="btn-add-cart"
-                onclick="addProductToCart(this)"
-              >
-                Add to cart
-              </button>
-              <button type="button" class="btn-buy" onclick="buyProduct(this)">
-                Buy
-              </button>
+              <button type="button" class="btn-add-cart" onclick="addProductToCart(this)">Add to cart</button>
+              <button type="button" class="btn-buy" onclick="buyProduct(this)">Buy</button>
             </div>
           </div>
         </div>
-        <div
-          class="product-card reveal"
-          data-id="men-2"
-          data-name="Slim Fit Denim Jacket"
-          data-price="89.99"
+
+        <div class="product-card reveal" data-id="men-2" data-name="Slim Fit Denim Jacket" data-price="89.99"
           data-image="https://images.unsplash.com/photo-1551028719-00167b16eac5?q=80&w=464&auto=format&fit=crop"
           data-description="Classic denim jacket with a slim fit design. Made from premium denim with reinforced stitching for durability and long-lasting wear."
-          onclick="openProductDetail(this)"
-        >
-          <button
-            class="product-favorite-btn"
-            onclick="addProductToFavorites(this)"
-            aria-label="Add to favorites"
-          >
+          onclick="openProductDetail(this)">
+          <button class="product-favorite-btn" onclick="addProductToFavorites(this)" aria-label="Add to favorites">
             <span class="material-symbols-outlined">favorite</span>
           </button>
-          <img
-            src="https://images.unsplash.com/photo-1551028719-00167b16eac5?q=80&w=464&auto=format&fit=crop"
-            alt="Slim Fit Denim Jacket"
-          />
+          <img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?q=80&w=464&auto=format&fit=crop" alt="Slim Fit Denim Jacket" />
           <div class="product-info">
             <h3>Slim Fit Denim Jacket</h3>
             <p class="product-price">$89.99</p>
             <div class="product-actions">
-              <button
-                type="button"
-                class="btn-add-cart"
-                onclick="addProductToCart(this)"
-              >
-                Add to cart
-              </button>
-              <button type="button" class="btn-buy" onclick="buyProduct(this)">
-                Buy
-              </button>
+              <button type="button" class="btn-add-cart" onclick="addProductToCart(this)">Add to cart</button>
+              <button type="button" class="btn-buy" onclick="buyProduct(this)">Buy</button>
             </div>
           </div>
         </div>
-        <div
-          class="product-card reveal"
-          data-id="men-3"
-          data-name="Oxford Button-Down Shirt"
-          data-price="49.99"
+
+        <div class="product-card reveal" data-id="men-3" data-name="Oxford Button-Down Shirt" data-price="49.99"
           data-image="https://images.unsplash.com/photo-1596755094514-f87e34085b2c?q=80&w=464&auto=format&fit=crop"
           data-description="Classic Oxford button-down shirt with timeless design. Premium cotton fabric offers comfort and breathability for all-day wear."
-          onclick="openProductDetail(this)"
-        >
-          <button
-            class="product-favorite-btn"
-            onclick="addProductToFavorites(this)"
-            aria-label="Add to favorites"
-          >
+          onclick="openProductDetail(this)">
+          <button class="product-favorite-btn" onclick="addProductToFavorites(this)" aria-label="Add to favorites">
             <span class="material-symbols-outlined">favorite</span>
           </button>
-          <img
-            src="https://images.unsplash.com/photo-1596755094514-f87e34085b2c?q=80&w=464&auto=format&fit=crop"
-            alt="Oxford Button-Down Shirt"
-          />
+          <img src="https://images.unsplash.com/photo-1596755094514-f87e34085b2c?q=80&w=464&auto=format&fit=crop" alt="Oxford Button-Down Shirt" />
           <div class="product-info">
             <h3>Oxford Button-Down Shirt</h3>
             <p class="product-price">$49.99</p>
             <div class="product-actions">
-              <button
-                type="button"
-                class="btn-add-cart"
-                onclick="addProductToCart(this)"
-              >
-                Add to cart
-              </button>
-              <button type="button" class="btn-buy" onclick="buyProduct(this)">
-                Buy
-              </button>
+              <button type="button" class="btn-add-cart" onclick="addProductToCart(this)">Add to cart</button>
+              <button type="button" class="btn-buy" onclick="buyProduct(this)">Buy</button>
             </div>
           </div>
         </div>
-        <div
-          class="product-card reveal"
-          data-id="men-4"
-          data-name="Casual Blazer"
-          data-price="129.99"
+
+        <div class="product-card reveal" data-id="men-4" data-name="Casual Blazer" data-price="129.99"
           data-image="https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=464&auto=format&fit=crop"
           data-description="Sophisticated casual blazer perfect for business-casual settings. Crafted from premium wool blend with expert tailoring."
-          onclick="openProductDetail(this)"
-        >
-          <button
-            class="product-favorite-btn"
-            onclick="addProductToFavorites(this)"
-            aria-label="Add to favorites"
-          >
+          onclick="openProductDetail(this)">
+          <button class="product-favorite-btn" onclick="addProductToFavorites(this)" aria-label="Add to favorites">
             <span class="material-symbols-outlined">favorite</span>
           </button>
-          <img
-            src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=464&auto=format&fit=crop"
-            alt="Casual Blazer"
-          />
+          <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=464&auto=format&fit=crop" alt="Casual Blazer" />
           <div class="product-info">
             <h3>Casual Blazer</h3>
             <p class="product-price">$129.99</p>
             <div class="product-actions">
-              <button
-                type="button"
-                class="btn-add-cart"
-                onclick="addProductToCart(this)"
-              >
-                Add to cart
-              </button>
-              <button type="button" class="btn-buy" onclick="buyProduct(this)">
-                Buy
-              </button>
+              <button type="button" class="btn-add-cart" onclick="addProductToCart(this)">Add to cart</button>
+              <button type="button" class="btn-buy" onclick="buyProduct(this)">Buy</button>
             </div>
           </div>
         </div>
-        <div
-          class="product-card reveal"
-          data-id="men-5"
-          data-name="Premium Polo Shirt"
-          data-price="44.99"
+
+        <div class="product-card reveal" data-id="men-5" data-name="Premium Polo Shirt" data-price="44.99"
           data-image="https://images.unsplash.com/photo-1594938298603-c8148c4dae35?q=80&w=464&auto=format&fit=crop"
           data-description="Premium polo shirt with refined craftsmanship. Features moisture-wicking fabric and a modern fit for everyday elegance."
-          onclick="openProductDetail(this)"
-        >
-          <button
-            class="product-favorite-btn"
-            onclick="addProductToFavorites(this)"
-            aria-label="Add to favorites"
-          >
+          onclick="openProductDetail(this)">
+          <button class="product-favorite-btn" onclick="addProductToFavorites(this)" aria-label="Add to favorites">
             <span class="material-symbols-outlined">favorite</span>
           </button>
-          <img
-            src="https://images.unsplash.com/photo-1594938298603-c8148c4dae35?q=80&w=464&auto=format&fit=crop"
-            alt="Premium Polo Shirt"
-          />
+          <img src="https://images.unsplash.com/photo-1594938298603-c8148c4dae35?q=80&w=464&auto=format&fit=crop" alt="Premium Polo Shirt" />
           <div class="product-info">
             <h3>Premium Polo Shirt</h3>
             <p class="product-price">$44.99</p>
             <div class="product-actions">
-              <button
-                type="button"
-                class="btn-add-cart"
-                onclick="addProductToCart(this)"
-              >
-                Add to cart
-              </button>
-              <button type="button" class="btn-buy" onclick="buyProduct(this)">
-                Buy
-              </button>
+              <button type="button" class="btn-add-cart" onclick="addProductToCart(this)">Add to cart</button>
+              <button type="button" class="btn-buy" onclick="buyProduct(this)">Buy</button>
             </div>
           </div>
         </div>
-        <div
-          class="product-card reveal"
-          data-id="men-6"
-          data-name="Urban Streetwear Hoodie"
-          data-price="64.99"
+
+        <div class="product-card reveal" data-id="men-6" data-name="Urban Streetwear Hoodie" data-price="64.99"
           data-image="https://images.unsplash.com/photo-1617127365659-c47fa864d8bc?q=80&w=464&auto=format&fit=crop"
           data-description="Trendy urban hoodie combining style and comfort. Made from soft cotton blend with modern streetwear aesthetics."
-          onclick="openProductDetail(this)"
-        >
-          <button
-            class="product-favorite-btn"
-            onclick="addProductToFavorites(this)"
-            aria-label="Add to favorites"
-          >
+          onclick="openProductDetail(this)">
+          <button class="product-favorite-btn" onclick="addProductToFavorites(this)" aria-label="Add to favorites">
             <span class="material-symbols-outlined">favorite</span>
           </button>
-          <img
-            src="https://images.unsplash.com/photo-1617127365659-c47fa864d8bc?q=80&w=464&auto=format&fit=crop"
-            alt="Urban Streetwear Hoodie"
-          />
+          <img src="https://images.unsplash.com/photo-1617127365659-c47fa864d8bc?q=80&w=464&auto=format&fit=crop" alt="Urban Streetwear Hoodie" />
           <div class="product-info">
             <h3>Urban Streetwear Hoodie</h3>
             <p class="product-price">$64.99</p>
             <div class="product-actions">
-              <button
-                type="button"
-                class="btn-add-cart"
-                onclick="addProductToCart(this)"
-              >
-                Add to cart
-              </button>
-              <button type="button" class="btn-buy" onclick="buyProduct(this)">
-                Buy
-              </button>
+              <button type="button" class="btn-add-cart" onclick="addProductToCart(this)">Add to cart</button>
+              <button type="button" class="btn-buy" onclick="buyProduct(this)">Buy</button>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ================= FOOTER ================= -->
+    <!-- Footer -->
     <footer class="footer reveal">
       <div class="footer-container">
         <div class="footer-brand">
           <h3>LuxeWear</h3>
-          <p>
-            Premium fashion brand delivering quality, comfort and timeless
-            design worldwide.
-          </p>
+          <p>Premium fashion brand delivering quality, comfort and timeless design worldwide.</p>
         </div>
-
         <div class="footer-links">
           <div>
             <h4>Shop</h4>
@@ -522,7 +273,6 @@
             <a href="accessories.html">Accessories</a>
             <a href="#">New Arrivals</a>
           </div>
-
           <div>
             <h4>Support</h4>
             <a href="#">Contact Us</a>
@@ -530,7 +280,6 @@
             <a href="#">Returns</a>
             <a href="#">FAQs</a>
           </div>
-
           <div>
             <h4>Newsletter</h4>
             <p>Subscribe for latest offers</p>
@@ -541,58 +290,35 @@
           </div>
         </div>
       </div>
-
       <div class="footer-bottom">© 2024 LuxeWear. All Rights Reserved.</div>
     </footer>
 
-    <!-- ================= PRODUCT DETAIL MODAL ================= -->
-    <div
-      class="product-detail-overlay"
-      id="productDetailOverlay"
-      onclick="closeProductDetail()"
-    ></div>
-    <div class="product-detail-modal" id="productDetailModal">
-      <div class="product-detail-content">
-        <button
-          class="product-detail-close"
-          onclick="closeProductDetail()"
-          aria-label="Close"
-        >
+    <!-- Product Detail Modal -->
+    <div class="overlay" id="productDetailOverlay" onclick="closeProductDetail()"></div>
+    <div class="modal prod-modal" id="productDetailModal">
+      <div class="modal-body">
+        <button class="close-btn" onclick="closeProductDetail()" aria-label="Close">
           <span class="material-symbols-outlined">close</span>
         </button>
-
-        <div class="product-detail-container">
-          <!-- Product Image -->
-          <div class="product-detail-image">
+        <div class="prod-detail">
+          <div class="prod-image">
             <img id="detailProductImage" src="" alt="Product" />
           </div>
-
-          <!-- Product Info -->
-          <div class="product-detail-info">
+          <div class="prod-info">
             <h2 id="detailProductName">Product Name</h2>
-
-            <div class="detail-rating">
-              <div class="detail-stars" id="detailRating">
+            <div class="prod-rating">
+              <div class="prod-stars" id="detailRating">
                 <span class="material-symbols-outlined">star</span>
                 <span class="material-symbols-outlined">star</span>
                 <span class="material-symbols-outlined">star</span>
                 <span class="material-symbols-outlined">star</span>
                 <span class="material-symbols-outlined">star</span>
               </div>
-              <span class="detail-review-count" id="detailReviewCount"
-                >(0 reviews)</span
-              >
+              <span class="prod-review-count" id="detailReviewCount">(0 reviews)</span>
             </div>
-
-            <p class="detail-price" id="detailProductPrice">$0.00</p>
-
-            <p class="detail-description" id="detailDescription">
-              Premium quality product with excellent craftsmanship and
-              materials.
-            </p>
-
-            <!-- Product Options -->
-            <div class="detail-options">
+            <p class="prod-price" id="detailProductPrice">$0.00</p>
+            <p class="prod-desc" id="detailDescription">Premium quality product with excellent craftsmanship and materials.</p>
+            <div class="prod-options">
               <div class="form-group">
                 <label for="detailSize">Size</label>
                 <select id="detailSize">
@@ -611,423 +337,211 @@
                 </div>
               </div>
             </div>
-
-            <!-- Actions -->
-            <div class="detail-actions">
-              <button class="primary-btn" onclick="addDetailProductToCart()">
-                Add to Cart
-              </button>
-              <button
-                class="primary-btn"
-                onclick="buyDetailProduct()"
-                style="background: #dc2626"
-              >
-                Buy Now
-              </button>
-              <button
-                class="secondary-btn"
-                onclick="toggleDetailFavorite()"
-                id="favBtn"
-              >
+            <div class="prod-actions">
+              <button class="btn btn-primary" onclick="addDetailProductToCart()">Add to Cart</button>
+              <button class="btn btn-danger" onclick="buyDetailProduct()">Buy Now</button>
+              <button class="btn btn-secondary" onclick="toggleDetailFavorite()" id="favBtn">
                 <span class="material-symbols-outlined">favorite</span>
                 Add to Favorites
               </button>
             </div>
           </div>
         </div>
-
-        <!-- Reviews Section -->
-        <div class="product-detail-reviews">
+        <div class="prod-reviews">
           <h3>Reviews & Ratings</h3>
-
-          <!-- Write Review Form -->
           <div class="write-review">
             <h4>Leave a Review</h4>
-            <form
-              id="reviewForm"
-              onsubmit="
-                submitReview(event);
-                return false;
-              "
-              class="auth-form"
-            >
+            <form id="reviewForm" onsubmit="submitReview(event); return false;" class="form-auth">
               <div class="form-group">
                 <label>Rating</label>
                 <div class="rating-input" id="ratingInput">
-                  <button type="button" class="star-btn" onclick="setRating(1)">
-                    ★
-                  </button>
-                  <button type="button" class="star-btn" onclick="setRating(2)">
-                    ★
-                  </button>
-                  <button type="button" class="star-btn" onclick="setRating(3)">
-                    ★
-                  </button>
-                  <button type="button" class="star-btn" onclick="setRating(4)">
-                    ★
-                  </button>
-                  <button type="button" class="star-btn" onclick="setRating(5)">
-                    ★
-                  </button>
+                  <button type="button" class="star-btn" onclick="setRating(1)">★</button>
+                  <button type="button" class="star-btn" onclick="setRating(2)">★</button>
+                  <button type="button" class="star-btn" onclick="setRating(3)">★</button>
+                  <button type="button" class="star-btn" onclick="setRating(4)">★</button>
+                  <button type="button" class="star-btn" onclick="setRating(5)">★</button>
                 </div>
                 <input type="hidden" id="selectedRating" value="0" />
               </div>
-
               <div class="form-group">
                 <label for="reviewName">Name</label>
-                <input
-                  type="text"
-                  id="reviewName"
-                  placeholder="Your name"
-                  required
-                />
+                <input type="text" id="reviewName" placeholder="Your name" required />
               </div>
-
               <div class="form-group">
                 <label for="reviewComment">Review</label>
-                <textarea
-                  id="reviewComment"
-                  placeholder="Share your experience..."
-                  rows="4"
-                  required
-                ></textarea>
+                <textarea id="reviewComment" placeholder="Share your experience..." rows="4" required></textarea>
               </div>
-
-              <button type="submit" class="primary-btn">Submit Review</button>
+              <button type="submit" class="btn btn-primary">Submit Review</button>
             </form>
           </div>
-
-          <!-- Reviews List -->
-          <div class="reviews-list" id="reviewsList">
-            <!-- Reviews rendered by JS -->
-          </div>
-          <div class="no-reviews" id="noReviews">
-            No reviews yet. Be the first to review!
-          </div>
+          <div class="reviews-list" id="reviewsList"></div>
+          <div class="no-reviews" id="noReviews">No reviews yet. Be the first to review!</div>
         </div>
       </div>
     </div>
 
-    <!-- ================= CART SIDEBAR ================= -->
-    <div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
-    <aside class="cart-sidebar" id="cartSidebar">
-      <div class="cart-sidebar-header">
+    <!-- Cart Sidebar -->
+    <div class="overlay" id="cartOverlay" onclick="closeCart()"></div>
+    <aside class="sidebar" id="cartSidebar">
+      <div class="sidebar-head">
         <h2>Your Cart</h2>
-        <button
-          class="cart-close"
-          onclick="closeCart()"
-          aria-label="Close cart"
-        >
+        <button class="close-btn" onclick="closeCart()" aria-label="Close cart">
           <span class="material-symbols-outlined">close</span>
         </button>
       </div>
-      <div class="cart-items" id="cartItems">
-        <!-- Cart items rendered by JS -->
-      </div>
-      <div class="cart-empty" id="cartEmpty">Your cart is empty.</div>
+      <div class="cart-items" id="cartItems"></div>
+      <div class="empty-msg" id="cartEmpty">Your cart is empty.</div>
       <div class="cart-footer" id="cartFooter">
         <div class="cart-subtotal">
           <span>Subtotal</span>
           <span id="cartSubtotal">$0.00</span>
         </div>
-        <button class="primary-btn cart-checkout-btn" onclick="openCheckout()">
-          Checkout
-        </button>
+        <button class="btn btn-primary cart-checkout-btn" onclick="openCheckout()">Checkout</button>
       </div>
     </aside>
 
-    <!-- ================= FAVORITES SIDEBAR ================= -->
-    <div
-      class="favorites-overlay"
-      id="favoritesOverlay"
-      onclick="closeFavorites()"
-    ></div>
-    <aside class="favorites-sidebar" id="favoritesSidebar">
-      <div class="favorites-sidebar-header">
+    <!-- Favorites Sidebar -->
+    <div class="overlay" id="favoritesOverlay" onclick="closeFavorites()"></div>
+    <aside class="sidebar" id="favoritesSidebar">
+      <div class="sidebar-head">
         <h2>My Favorites</h2>
-        <button
-          class="favorites-close"
-          onclick="closeFavorites()"
-          aria-label="Close favorites"
-        >
+        <button class="close-btn" onclick="closeFavorites()" aria-label="Close favorites">
           <span class="material-symbols-outlined">close</span>
         </button>
       </div>
-      <div class="favorites-items" id="favoritesItems">
-        <!-- Favorites items rendered by JS -->
-      </div>
-      <div class="favorites-empty" id="favoritesEmpty">
-        No favorites yet. Start adding your favorites!
-      </div>
+      <div class="favorites-items" id="favoritesItems"></div>
+      <div class="empty-msg" id="favoritesEmpty">No favorites yet. Start adding your favorites!</div>
     </aside>
 
-    <!-- ================= CHECKOUT MODAL ================= -->
-    <div
-      class="checkout-overlay"
-      id="checkoutOverlay"
-      onclick="closeCheckout()"
-    ></div>
-    <div class="checkout-modal" id="checkoutModal">
-      <div class="checkout-modal-content">
-        <button
-          class="checkout-close"
-          onclick="closeCheckout()"
-          aria-label="Close"
-        >
+    <!-- Checkout Modal -->
+    <div class="overlay" id="checkoutOverlay" onclick="closeCheckout()"></div>
+    <div class="modal checkout-modal" id="checkoutModal">
+      <div class="modal-body">
+        <button class="close-btn" onclick="closeCheckout()" aria-label="Close">
           <span class="material-symbols-outlined">close</span>
         </button>
         <h2>Checkout</h2>
-
         <div class="checkout-sections">
-          <!-- Order Summary -->
           <div class="checkout-section">
             <h3>Order Summary</h3>
-            <div class="checkout-items" id="checkoutItems">
-              <!-- Items populated by JS -->
-            </div>
+            <div class="checkout-items" id="checkoutItems"></div>
             <div class="checkout-summary">
-              <div class="summary-row">
-                <span>Subtotal</span>
-                <span id="checkoutSubtotal">$0.00</span>
-              </div>
-              <div class="summary-row">
-                <span>Shipping</span>
-                <span id="checkoutShipping">$10.00</span>
-              </div>
-              <div class="summary-row total">
-                <span>Total</span>
-                <span id="checkoutTotal">$10.00</span>
-              </div>
+              <div class="summary-row"><span>Subtotal</span><span id="checkoutSubtotal">$0.00</span></div>
+              <div class="summary-row"><span>Shipping</span><span id="checkoutShipping">$10.00</span></div>
+              <div class="summary-row total"><span>Total</span><span id="checkoutTotal">$10.00</span></div>
             </div>
           </div>
-
-          <!-- Shipping Address -->
           <div class="checkout-section">
             <h3>Shipping Address</h3>
-            <form id="shippingForm" class="auth-form">
+            <form id="shippingForm" class="form-auth">
               <div class="form-group">
                 <label for="shippingName">Full Name</label>
-                <input
-                  type="text"
-                  id="shippingName"
-                  placeholder="John Doe"
-                  required
-                />
+                <input type="text" id="shippingName" placeholder="John Doe" required />
               </div>
               <div class="form-group">
                 <label for="shippingEmail">Email</label>
-                <input
-                  type="email"
-                  id="shippingEmail"
-                  placeholder="your@email.com"
-                  required
-                />
+                <input type="email" id="shippingEmail" placeholder="your@email.com" required />
               </div>
               <div class="form-group">
                 <label for="shippingPhone">Phone</label>
-                <input
-                  type="tel"
-                  id="shippingPhone"
-                  placeholder="+1 (555) 000-0000"
-                  required
-                />
+                <input type="tel" id="shippingPhone" placeholder="+1 (555) 000-0000" required />
               </div>
               <div class="form-group">
                 <label for="shippingAddress">Street Address</label>
-                <input
-                  type="text"
-                  id="shippingAddress"
-                  placeholder="123 Main Street"
-                  required
-                />
+                <input type="text" id="shippingAddress" placeholder="123 Main Street" required />
               </div>
               <div class="form-row">
                 <div class="form-group">
                   <label for="shippingCity">City</label>
-                  <input
-                    type="text"
-                    id="shippingCity"
-                    placeholder="New York"
-                    required
-                  />
+                  <input type="text" id="shippingCity" placeholder="New York" required />
                 </div>
                 <div class="form-group">
                   <label for="shippingState">State/Province</label>
-                  <input
-                    type="text"
-                    id="shippingState"
-                    placeholder="NY"
-                    required
-                  />
+                  <input type="text" id="shippingState" placeholder="NY" required />
                 </div>
               </div>
               <div class="form-row">
                 <div class="form-group">
                   <label for="shippingZip">ZIP/Postal Code</label>
-                  <input
-                    type="text"
-                    id="shippingZip"
-                    placeholder="10001"
-                    required
-                  />
+                  <input type="text" id="shippingZip" placeholder="10001" required />
                 </div>
                 <div class="form-group">
                   <label for="shippingCountry">Country</label>
-                  <input
-                    type="text"
-                    id="shippingCountry"
-                    placeholder="United States"
-                    required
-                  />
+                  <input type="text" id="shippingCountry" placeholder="United States" required />
                 </div>
               </div>
             </form>
           </div>
-
-          <!-- Payment -->
           <div class="checkout-section">
             <h3>Payment Method</h3>
-            <div id="paypal-button-container" style="margin-top: 20px"></div>
+            <div id="paypal-button-container"></div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- ================= AUTH MODAL ================= -->
-    <div class="auth-overlay" id="authOverlay" onclick="closeAuth()"></div>
-    <div class="auth-modal" id="authModal">
-      <div class="auth-modal-content">
-        <button class="auth-close" onclick="closeAuth()" aria-label="Close">
+    <!-- Auth Modal -->
+    <div class="overlay" id="authOverlay" onclick="closeAuth()"></div>
+    <div class="modal auth-modal" id="authModal">
+      <div class="modal-body">
+        <button class="close-btn" onclick="closeAuth()" aria-label="Close">
           <span class="material-symbols-outlined">close</span>
         </button>
 
-        <!-- LOGIN TAB -->
         <div class="auth-tab-content" id="loginTab">
           <h2>Login</h2>
-          <form
-            class="auth-form"
-            onsubmit="
-              handleLogin(event);
-              return false;
-            "
-          >
+          <form class="form-auth" onsubmit="handleLogin(event); return false;">
             <div class="form-group">
               <label for="loginEmail">Email</label>
-              <input
-                type="email"
-                id="loginEmail"
-                placeholder="your@email.com"
-                required
-              />
+              <input type="email" id="loginEmail" placeholder="your@email.com" required />
             </div>
             <div class="form-group">
               <label for="loginPassword">Password</label>
-              <input
-                type="password"
-                id="loginPassword"
-                placeholder="Enter password"
-                required
-              />
+              <input type="password" id="loginPassword" placeholder="Enter password" required />
             </div>
-            <button type="submit" class="primary-btn auth-btn">Login</button>
-            <div class="divider">
-              <span>OR</span>
-            </div>
-            <button
-              type="button"
-              class="google-btn"
-              onclick="signInWithGoogle()"
-            >
+            <button type="submit" class="btn btn-primary" style="width:100%">Login</button>
+            <div class="divider"><span>OR</span></div>
+            <button type="button" class="google-btn" onclick="signInWithGoogle()">
               <span class="material-symbols-outlined">language</span>
               Continue with Google
             </button>
             <p class="auth-toggle-text">
-              Don't have an account?
-              <a
-                href="#"
-                onclick="
-                  switchAuthTab('signup');
-                  return false;
-                "
-                >Sign Up</a
-              >
+              Don't have an account? <a href="#" onclick="switchAuthTab('signup'); return false;">Sign Up</a>
             </p>
           </form>
         </div>
 
-        <!-- SIGNUP TAB -->
         <div class="auth-tab-content hidden" id="signupTab">
           <h2>Create Account</h2>
-          <form
-            class="auth-form"
-            onsubmit="
-              handleSignup(event);
-              return false;
-            "
-          >
+          <form class="form-auth" onsubmit="handleSignup(event); return false;">
             <div class="form-group">
               <label for="signupName">Full Name</label>
-              <input
-                type="text"
-                id="signupName"
-                placeholder="John Doe"
-                required
-              />
+              <input type="text" id="signupName" placeholder="John Doe" required />
             </div>
             <div class="form-group">
               <label for="signupEmail">Email</label>
-              <input
-                type="email"
-                id="signupEmail"
-                placeholder="your@email.com"
-                required
-              />
+              <input type="email" id="signupEmail" placeholder="your@email.com" required />
             </div>
             <div class="form-group">
               <label for="signupPassword">Password</label>
-              <input
-                type="password"
-                id="signupPassword"
-                placeholder="Enter password"
-                required
-              />
+              <input type="password" id="signupPassword" placeholder="Enter password" required />
             </div>
             <div class="form-group">
               <label for="signupConfirm">Confirm Password</label>
-              <input
-                type="password"
-                id="signupConfirm"
-                placeholder="Confirm password"
-                required
-              />
+              <input type="password" id="signupConfirm" placeholder="Confirm password" required />
             </div>
-            <button type="submit" class="primary-btn auth-btn">Sign Up</button>
-            <div class="divider">
-              <span>OR</span>
-            </div>
-            <button
-              type="button"
-              class="google-btn"
-              onclick="signInWithGoogle()"
-            >
+            <button type="submit" class="btn btn-primary" style="width:100%">Sign Up</button>
+            <div class="divider"><span>OR</span></div>
+            <button type="button" class="google-btn" onclick="signInWithGoogle()">
               <span class="material-symbols-outlined">language</span>
               Continue with Google
             </button>
             <p class="auth-toggle-text">
-              Already have an account?
-              <a
-                href="#"
-                onclick="
-                  switchAuthTab('login');
-                  return false;
-                "
-                >Login</a
-              >
+              Already have an account? <a href="#" onclick="switchAuthTab('login'); return false;">Login</a>
             </p>
           </form>
         </div>
 
-        <!-- PROFILE TAB -->
         <div class="auth-tab-content hidden" id="profileTab">
           <h2>My Profile</h2>
           <div class="profile-info" id="profileInfo">
@@ -1041,61 +555,32 @@
             </div>
           </div>
           <div class="profile-actions">
-            <button class="secondary-btn" onclick="openSettings()">
-              Settings
-            </button>
-            <button class="secondary-btn" onclick="handleLogout()">
-              Logout
-            </button>
+            <button class="btn btn-secondary" onclick="openSettings()">Settings</button>
+            <button class="btn btn-secondary" onclick="handleLogout()">Logout</button>
           </div>
         </div>
 
-        <!-- SETTINGS TAB -->
         <div class="auth-tab-content hidden" id="settingsTab">
           <h2>Settings</h2>
-          <form
-            class="auth-form"
-            onsubmit="
-              handleSettings(event);
-              return false;
-            "
-          >
+          <form class="form-auth" onsubmit="handleSettings(event); return false;">
             <div class="form-group">
               <label for="settingsName">Full Name</label>
               <input type="text" id="settingsName" placeholder="John Doe" />
             </div>
             <div class="form-group">
               <label for="settingsEmail">Email</label>
-              <input
-                type="email"
-                id="settingsEmail"
-                placeholder="your@email.com"
-              />
+              <input type="email" id="settingsEmail" placeholder="your@email.com" />
             </div>
             <div class="form-group">
               <label for="settingsPhone">Phone</label>
-              <input
-                type="tel"
-                id="settingsPhone"
-                placeholder="+1 (555) 000-0000"
-              />
+              <input type="tel" id="settingsPhone" placeholder="+1 (555) 000-0000" />
             </div>
             <div class="form-group checkbox">
               <input type="checkbox" id="settingsNotifications" checked />
-              <label for="settingsNotifications"
-                >Receive email notifications</label
-              >
+              <label for="settingsNotifications">Receive email notifications</label>
             </div>
-            <button type="submit" class="primary-btn auth-btn">
-              Save Changes
-            </button>
-            <button
-              type="button"
-              class="secondary-btn auth-btn"
-              onclick="switchAuthTab('profile')"
-            >
-              Back to Profile
-            </button>
+            <button type="submit" class="btn btn-primary" style="width:100%">Save Changes</button>
+            <button type="button" class="btn btn-secondary" style="width:100%" onclick="switchAuthTab('profile')">Back to Profile</button>
           </form>
         </div>
       </div>

@@ -4,42 +4,26 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Women's Collection | LuxeWear</title>
-
-    <link
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     <link rel="stylesheet" href="style.css" />
-    <link
-      rel="shortcut icon"
-      href="https://cdn-icons-png.flaticon.com/512/6645/6645261.png"
-      type="image/x-icon"
-    />
-    <!-- Firebase -->
+    <link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/512/6645/6645261.png" type="image/x-icon" />
     <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js"></script>
-    <!-- Google Auth -->
     <script src="https://accounts.google.com/gsi/client" async defer></script>
-    <!-- PayPal -->
     <script src="https://www.paypal.com/sdk/js?client-id=AWJ5xajOFwkTtTG8sImSpqrZVRNUY1YN5vTFsPcMDrxp-L7-bCjm2uNqCEY2zMvZrVZx1LAI7HgXEVIp"></script>
   </head>
-
   <body>
-    <!-- ================= NOTIFICATION SYSTEM ================= -->
+    <!-- Notifications -->
     <div class="notification-container" id="notificationContainer"></div>
 
-    <!-- ================= NAVBAR ================= -->
+    <!-- Navbar -->
     <nav class="navbar">
       <a href="index.html" class="logo">
         <span class="material-symbols-outlined logo-shirt">checkroom</span>
         <span>LuxeWear</span>
       </a>
 
-      <button
-        class="menu-toggle"
-        onclick="toggleMenu()"
-        aria-label="Toggle menu"
-      >
+      <button class="menu-toggle" onclick="toggleMenu()" aria-label="Toggle menu">
         <span class="material-symbols-outlined" id="menuIcon">menu</span>
         <span class="material-symbols-outlined" id="closeIcon">close</span>
       </button>
@@ -51,58 +35,24 @@
         <li><a href="accessories.html">Accessories</a></li>
         <li class="nav-search-mobile">
           <div class="nav-search-inner">
-            <input
-              type="text"
-              class="search-input-mobile"
-              id="searchInputMobile"
-              placeholder="Search..."
-              oninput="
-                handleSearch(this.value);
-                syncSearchInputs(this.value);
-              "
-            />
-            <button
-              type="button"
-              class="search-close-mobile"
-              onclick="clearSearchMobile()"
-              aria-label="Close search"
-            >
+            <input type="text" class="search-input-mobile" id="searchInputMobile" placeholder="Search..."
+              oninput="handleSearch(this.value); syncSearchInputs(this.value)" />
+            <button type="button" class="search-close-mobile" onclick="clearSearchMobile()" aria-label="Close search">
               <span class="material-symbols-outlined">close</span>
             </button>
           </div>
         </li>
         <li class="nav-menu-icons">
-          <button
-            type="button"
-            class="nav-menu-icon-item"
-            onclick="
-              toggleMenu();
-              toggleCart();
-            "
-          >
+          <button type="button" class="nav-menu-icon-item" onclick="toggleMenu(); toggleCart()">
             <span class="material-symbols-outlined">shopping_bag</span>
             <span>Cart</span>
             <span class="cart-count">0</span>
           </button>
-          <button
-            type="button"
-            class="nav-menu-icon-item"
-            onclick="
-              toggleMenu();
-              toggleFavorites();
-            "
-          >
+          <button type="button" class="nav-menu-icon-item" onclick="toggleMenu(); toggleFavorites()">
             <span class="material-symbols-outlined">favorite</span>
             <span>Favorites</span>
           </button>
-          <button
-            type="button"
-            class="nav-menu-icon-item"
-            onclick="
-              toggleMenu();
-              openAuth();
-            "
-          >
+          <button type="button" class="nav-menu-icon-item" onclick="toggleMenu(); openAuth()">
             <span class="material-symbols-outlined">person</span>
             <span>Profile</span>
           </button>
@@ -111,111 +61,55 @@
 
       <div class="nav-icons">
         <div class="search-wrap">
-          <button
-            class="search-toggle"
-            type="button"
-            onclick="toggleSearch()"
-            aria-label="Search"
-          >
+          <button class="search-toggle" type="button" onclick="toggleSearch()" aria-label="Search">
             <span class="material-symbols-outlined">search</span>
           </button>
           <div class="search-box">
-            <span class="material-symbols-outlined search-icon-inside"
-              >search</span
-            >
-            <input
-              type="text"
-              class="search-input"
-              id="searchInput"
-              placeholder="Search..."
-              oninput="handleSearch(this.value)"
-            />
-            <button
-              class="search-close"
-              type="button"
-              onclick="toggleSearch()"
-              aria-label="Close search"
-            >
+            <span class="material-symbols-outlined search-icon-inside">search</span>
+            <input type="text" class="search-input" id="searchInput" placeholder="Search..." oninput="handleSearch(this.value)" />
+            <button class="search-close" type="button" onclick="toggleSearch()" aria-label="Close search">
               <span class="material-symbols-outlined">close</span>
             </button>
           </div>
         </div>
-        <span
-          class="material-symbols-outlined nav-icon"
-          onclick="toggleFavorites()"
-          title="Favorites"
-          >favorite</span
-        >
-
+        <span class="material-symbols-outlined nav-icon" onclick="toggleFavorites()" title="Favorites">favorite</span>
         <div class="cart-icon" onclick="toggleCart()">
           <span class="material-symbols-outlined nav-icon">shopping_bag</span>
           <span class="cart-count" id="cartCount">0</span>
         </div>
-
-        <span class="material-symbols-outlined nav-icon" onclick="openAuth()"
-          >person</span
-        >
+        <span class="material-symbols-outlined nav-icon" onclick="openAuth()">person</span>
       </div>
     </nav>
 
-    <!-- ================= HERO ================= -->
+    <!-- Hero -->
     <section class="hero reveal">
       <div class="hero-slider">
-        <div
-          class="slide active"
-          style="
-            background-image: url(&quot;https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?q=80&w=2070&auto=format&fit=crop&quot;);
-          "
-        ></div>
-        <div
-          class="slide"
-          style="
-            background-image: url(&quot;https://images.unsplash.com/photo-1747049559461-560c02b192b2?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&quot;);
-          "
-        ></div>
-        <div
-          class="slide"
-          style="
-            background-image: url(&quot;https://images.unsplash.com/photo-1763559031256-7cb09353b583?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&quot;);
-          "
-        ></div>
+        <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?q=80&w=2070&auto=format&fit=crop')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1747049559461-560c02b192b2?q=80&w=870&auto=format&fit=crop')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1763559031256-7cb09353b583?q=80&w=387&auto=format&fit=crop')"></div>
       </div>
-
       <div class="hero-content">
         <h1>Women's Collection</h1>
         <p>Elegant dresses & timeless styles for every occasion.</p>
-        <button class="primary-btn">Shop Women</button>
+        <button class="btn btn-primary">Shop Women</button>
       </div>
     </section>
 
-    <!-- ================= WOMEN'S FASHION GRID ================= -->
+    <!-- Categories -->
     <section class="section reveal">
       <h2 class="section-title">Women's Fashion</h2>
-      <div class="search-no-results" id="searchNoResults">
-        No results found.
-      </div>
+      <div class="search-no-results" id="searchNoResults">No results found.</div>
 
       <div class="category-grid">
         <div class="category-card">
-          <a href="#">
-            <img
-              src="https://images.unsplash.com/photo-1616313253719-c46514cddee1?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-              alt="Women's dress"
-            />
-          </a>
+          <a href="#"><img src="https://images.unsplash.com/photo-1616313253719-c46514cddee1?q=80&w=387&auto=format&fit=crop" alt="Dresses" /></a>
           <div class="category-info">
             <h3>Dresses</h3>
             <p>From casual day dresses to elegant evening wear.</p>
           </div>
         </div>
-
         <div class="category-card">
-          <a href="#">
-            <img
-              src="https://images.unsplash.com/photo-1767785829347-cc13bd969514?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-              alt="Women's casual dress"
-            />
-          </a>
+          <a href="#"><img src="https://images.unsplash.com/photo-1767785829347-cc13bd969514?q=80&w=387&auto=format&fit=crop" alt="Casual Dresses" /></a>
           <div class="category-info">
             <h3>Casual Dresses</h3>
             <p>Comfortable everyday dresses with a polished look.</p>
@@ -223,245 +117,126 @@
         </div>
       </div>
 
-      <!-- ================= WOMEN'S PRODUCTS ================= -->
+      <!-- Products -->
       <h2 class="section-title">Shop Women</h2>
       <div class="product-grid">
-        <div
-          class="product-card reveal"
-          data-id="women-1"
-          data-name="Floral Midi Dress"
-          data-price="79.99"
+        <div class="product-card reveal" data-id="women-1" data-name="Floral Midi Dress" data-price="79.99"
           data-image="https://images.unsplash.com/photo-1616313253719-c46514cddee1?q=80&w=387&auto=format&fit=crop"
           data-description="Beautiful floral midi dress with elegant pattern. Perfect for casual outings or special occasions, featuring breathable fabric and flattering cut."
-          onclick="openProductDetail(this)"
-        >
-          <button
-            class="product-favorite-btn"
-            onclick="addProductToFavorites(this)"
-            aria-label="Add to favorites"
-          >
+          onclick="openProductDetail(this)">
+          <button class="product-favorite-btn" onclick="addProductToFavorites(this)" aria-label="Add to favorites">
             <span class="material-symbols-outlined">favorite</span>
           </button>
-          <img
-            src="https://images.unsplash.com/photo-1616313253719-c46514cddee1?q=80&w=387&auto=format&fit=crop"
-            alt="Floral Midi Dress"
-          />
+          <img src="https://images.unsplash.com/photo-1616313253719-c46514cddee1?q=80&w=387&auto=format&fit=crop" alt="Floral Midi Dress" />
           <div class="product-info">
             <h3>Floral Midi Dress</h3>
             <p class="product-price">$79.99</p>
             <div class="product-actions">
-              <button
-                type="button"
-                class="btn-add-cart"
-                onclick="addProductToCart(this)"
-              >
-                Add to cart
-              </button>
-              <button type="button" class="btn-buy" onclick="buyProduct(this)">
-                Buy
-              </button>
+              <button type="button" class="btn-add-cart" onclick="addProductToCart(this)">Add to cart</button>
+              <button type="button" class="btn-buy" onclick="buyProduct(this)">Buy</button>
             </div>
           </div>
         </div>
-        <div
-          class="product-card reveal"
-          data-id="women-2"
-          data-name="Casual Day Dress"
-          data-price="59.99"
+
+        <div class="product-card reveal" data-id="women-2" data-name="Casual Day Dress" data-price="59.99"
           data-image="https://images.unsplash.com/photo-1767785829347-cc13bd969514?q=80&w=387&auto=format&fit=crop"
           data-description="Comfortable casual day dress designed for everyday wear. Soft, breathable fabric with a simple yet stylish design perfect for work or leisure."
-          onclick="openProductDetail(this)"
-        >
-          <button
-            class="product-favorite-btn"
-            onclick="addProductToFavorites(this)"
-            aria-label="Add to favorites"
-          >
+          onclick="openProductDetail(this)">
+          <button class="product-favorite-btn" onclick="addProductToFavorites(this)" aria-label="Add to favorites">
             <span class="material-symbols-outlined">favorite</span>
           </button>
-          <img
-            src="https://images.unsplash.com/photo-1767785829347-cc13bd969514?q=80&w=387&auto=format&fit=crop"
-            alt="Casual Day Dress"
-          />
+          <img src="https://images.unsplash.com/photo-1767785829347-cc13bd969514?q=80&w=387&auto=format&fit=crop" alt="Casual Day Dress" />
           <div class="product-info">
             <h3>Casual Day Dress</h3>
             <p class="product-price">$59.99</p>
             <div class="product-actions">
-              <button
-                type="button"
-                class="btn-add-cart"
-                onclick="addProductToCart(this)"
-              >
-                Add to cart
-              </button>
-              <button type="button" class="btn-buy" onclick="buyProduct(this)">
-                Buy
-              </button>
+              <button type="button" class="btn-add-cart" onclick="addProductToCart(this)">Add to cart</button>
+              <button type="button" class="btn-buy" onclick="buyProduct(this)">Buy</button>
             </div>
           </div>
         </div>
-        <div
-          class="product-card reveal"
-          data-id="women-3"
-          data-name="Elegant Evening Dress"
-          data-price="149.99"
-          data-image="https://images.unsplash.com/photo-1734944688807-d44969bac7c5?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+
+        <div class="product-card reveal" data-id="women-3" data-name="Elegant Evening Dress" data-price="149.99"
+          data-image="https://images.unsplash.com/photo-1734944688807-d44969bac7c5?q=80&w=387&auto=format&fit=crop"
           data-description="Sophisticated evening dress for formal occasions. Crafted from premium fabric with elegant details, perfect for gala events and special celebrations."
-          onclick="openProductDetail(this)"
-        >
-          <button
-            class="product-favorite-btn"
-            onclick="addProductToFavorites(this)"
-            aria-label="Add to favorites"
-          >
+          onclick="openProductDetail(this)">
+          <button class="product-favorite-btn" onclick="addProductToFavorites(this)" aria-label="Add to favorites">
             <span class="material-symbols-outlined">favorite</span>
           </button>
-          <img
-            src="https://images.unsplash.com/photo-1734944688807-d44969bac7c5?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            alt="Elegant Evening Dress"
-          />
+          <img src="https://images.unsplash.com/photo-1734944688807-d44969bac7c5?q=80&w=387&auto=format&fit=crop" alt="Elegant Evening Dress" />
           <div class="product-info">
             <h3>Elegant Evening Dress</h3>
             <p class="product-price">$149.99</p>
             <div class="product-actions">
-              <button
-                type="button"
-                class="btn-add-cart"
-                onclick="addProductToCart(this)"
-              >
-                Add to cart
-              </button>
-              <button type="button" class="btn-buy" onclick="buyProduct(this)">
-                Buy
-              </button>
+              <button type="button" class="btn-add-cart" onclick="addProductToCart(this)">Add to cart</button>
+              <button type="button" class="btn-buy" onclick="buyProduct(this)">Buy</button>
             </div>
           </div>
         </div>
-        <div
-          class="product-card reveal"
-          data-id="women-4"
-          data-name="Summer Maxi Dress"
-          data-price="69.99"
+
+        <div class="product-card reveal" data-id="women-4" data-name="Summer Maxi Dress" data-price="69.99"
           data-image="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?q=80&w=464&auto=format&fit=crop"
           data-description="Flowing summer maxi dress ideal for warm weather. Light and airy with a comfortable fit, perfect for beach days or casual summer outings."
-          onclick="openProductDetail(this)"
-        >
-          <button
-            class="product-favorite-btn"
-            onclick="addProductToFavorites(this)"
-            aria-label="Add to favorites"
-          >
+          onclick="openProductDetail(this)">
+          <button class="product-favorite-btn" onclick="addProductToFavorites(this)" aria-label="Add to favorites">
             <span class="material-symbols-outlined">favorite</span>
           </button>
-          <img
-            src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?q=80&w=464&auto=format&fit=crop"
-            alt="Summer Maxi Dress"
-          />
+          <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?q=80&w=464&auto=format&fit=crop" alt="Summer Maxi Dress" />
           <div class="product-info">
             <h3>Summer Maxi Dress</h3>
             <p class="product-price">$69.99</p>
             <div class="product-actions">
-              <button
-                type="button"
-                class="btn-add-cart"
-                onclick="addProductToCart(this)"
-              >
-                Add to cart
-              </button>
-              <button type="button" class="btn-buy" onclick="buyProduct(this)">
-                Buy
-              </button>
+              <button type="button" class="btn-add-cart" onclick="addProductToCart(this)">Add to cart</button>
+              <button type="button" class="btn-buy" onclick="buyProduct(this)">Buy</button>
             </div>
           </div>
         </div>
-        <div
-          class="product-card reveal"
-          data-id="women-5"
-          data-name="Wrap Dress"
-          data-price="64.99"
-          data-image="https://images.unsplash.com/photo-1734944688814-84e2c89c48a7?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+
+        <div class="product-card reveal" data-id="women-5" data-name="Wrap Dress" data-price="64.99"
+          data-image="https://images.unsplash.com/photo-1734944688814-84e2c89c48a7?q=80&w=387&auto=format&fit=crop"
           data-description="Classic wrap dress with adjustable waist tie. Versatile style that flatters all body types, easy to dress up or down for any occasion."
-          onclick="openProductDetail(this)"
-        >
-          <button
-            class="product-favorite-btn"
-            onclick="addProductToFavorites(this)"
-            aria-label="Add to favorites"
-          >
+          onclick="openProductDetail(this)">
+          <button class="product-favorite-btn" onclick="addProductToFavorites(this)" aria-label="Add to favorites">
             <span class="material-symbols-outlined">favorite</span>
           </button>
-          <img
-            src="https://images.unsplash.com/photo-1734944688814-84e2c89c48a7?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            alt="Wrap Dress"
-          />
+          <img src="https://images.unsplash.com/photo-1734944688814-84e2c89c48a7?q=80&w=387&auto=format&fit=crop" alt="Wrap Dress" />
           <div class="product-info">
             <h3>Wrap Dress</h3>
             <p class="product-price">$64.99</p>
             <div class="product-actions">
-              <button
-                type="button"
-                class="btn-add-cart"
-                onclick="addProductToCart(this)"
-              >
-                Add to cart
-              </button>
-              <button type="button" class="btn-buy" onclick="buyProduct(this)">
-                Buy
-              </button>
+              <button type="button" class="btn-add-cart" onclick="addProductToCart(this)">Add to cart</button>
+              <button type="button" class="btn-buy" onclick="buyProduct(this)">Buy</button>
             </div>
           </div>
         </div>
-        <div
-          class="product-card reveal"
-          data-id="women-6"
-          data-name="Casual Shift Dress"
-          data-price="54.99"
-          data-image="https://images.unsplash.com/photo-1763559019748-a68819927eda?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+
+        <div class="product-card reveal" data-id="women-6" data-name="Casual Shift Dress" data-price="54.99"
+          data-image="https://images.unsplash.com/photo-1763559019748-a68819927eda?q=80&w=387&auto=format&fit=crop"
           data-description="Effortless casual shift dress with relaxed silhouette. Perfect for everyday comfort with a modern, minimalist design."
-          onclick="openProductDetail(this)"
-        >
-          <button
-            class="product-favorite-btn"
-            onclick="addProductToFavorites(this)"
-            aria-label="Add to favorites"
-          >
+          onclick="openProductDetail(this)">
+          <button class="product-favorite-btn" onclick="addProductToFavorites(this)" aria-label="Add to favorites">
             <span class="material-symbols-outlined">favorite</span>
           </button>
-          <img
-            src="https://images.unsplash.com/photo-1763559019748-a68819927eda?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            alt="Casual Shift Dress"
-          />
+          <img src="https://images.unsplash.com/photo-1763559019748-a68819927eda?q=80&w=387&auto=format&fit=crop" alt="Casual Shift Dress" />
           <div class="product-info">
             <h3>Casual Shift Dress</h3>
             <p class="product-price">$54.99</p>
             <div class="product-actions">
-              <button
-                type="button"
-                class="btn-add-cart"
-                onclick="addProductToCart(this)"
-              >
-                Add to cart
-              </button>
-              <button type="button" class="btn-buy" onclick="buyProduct(this)">
-                Buy
-              </button>
+              <button type="button" class="btn-add-cart" onclick="addProductToCart(this)">Add to cart</button>
+              <button type="button" class="btn-buy" onclick="buyProduct(this)">Buy</button>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ================= FOOTER ================= -->
+    <!-- Footer -->
     <footer class="footer reveal">
       <div class="footer-container">
         <div class="footer-brand">
           <h3>LuxeWear</h3>
-          <p>
-            Premium fashion brand delivering quality, comfort and timeless
-            design worldwide.
-          </p>
+          <p>Premium fashion brand delivering quality, comfort and timeless design worldwide.</p>
         </div>
-
         <div class="footer-links">
           <div>
             <h4>Shop</h4>
@@ -470,7 +245,6 @@
             <a href="accessories.html">Accessories</a>
             <a href="#">New Arrivals</a>
           </div>
-
           <div>
             <h4>Support</h4>
             <a href="#">Contact Us</a>
@@ -478,7 +252,6 @@
             <a href="#">Returns</a>
             <a href="#">FAQs</a>
           </div>
-
           <div>
             <h4>Newsletter</h4>
             <p>Subscribe for latest offers</p>
@@ -489,58 +262,35 @@
           </div>
         </div>
       </div>
-
       <div class="footer-bottom">© 2024 LuxeWear. All Rights Reserved.</div>
     </footer>
 
-    <!-- ================= PRODUCT DETAIL MODAL ================= -->
-    <div
-      class="product-detail-overlay"
-      id="productDetailOverlay"
-      onclick="closeProductDetail()"
-    ></div>
-    <div class="product-detail-modal" id="productDetailModal">
-      <div class="product-detail-content">
-        <button
-          class="product-detail-close"
-          onclick="closeProductDetail()"
-          aria-label="Close"
-        >
+    <!-- Product Detail Modal -->
+    <div class="overlay" id="productDetailOverlay" onclick="closeProductDetail()"></div>
+    <div class="modal prod-modal" id="productDetailModal">
+      <div class="modal-body">
+        <button class="close-btn" onclick="closeProductDetail()" aria-label="Close">
           <span class="material-symbols-outlined">close</span>
         </button>
-
-        <div class="product-detail-container">
-          <!-- Product Image -->
-          <div class="product-detail-image">
+        <div class="prod-detail">
+          <div class="prod-image">
             <img id="detailProductImage" src="" alt="Product" />
           </div>
-
-          <!-- Product Info -->
-          <div class="product-detail-info">
+          <div class="prod-info">
             <h2 id="detailProductName">Product Name</h2>
-
-            <div class="detail-rating">
-              <div class="detail-stars" id="detailRating">
+            <div class="prod-rating">
+              <div class="prod-stars" id="detailRating">
                 <span class="material-symbols-outlined">star</span>
                 <span class="material-symbols-outlined">star</span>
                 <span class="material-symbols-outlined">star</span>
                 <span class="material-symbols-outlined">star</span>
                 <span class="material-symbols-outlined">star</span>
               </div>
-              <span class="detail-review-count" id="detailReviewCount"
-                >(0 reviews)</span
-              >
+              <span class="prod-review-count" id="detailReviewCount">(0 reviews)</span>
             </div>
-
-            <p class="detail-price" id="detailProductPrice">$0.00</p>
-
-            <p class="detail-description" id="detailDescription">
-              Premium quality product with excellent craftsmanship and
-              materials.
-            </p>
-
-            <!-- Product Options -->
-            <div class="detail-options">
+            <p class="prod-price" id="detailProductPrice">$0.00</p>
+            <p class="prod-desc" id="detailDescription">Premium quality product with excellent craftsmanship and materials.</p>
+            <div class="prod-options">
               <div class="form-group">
                 <label for="detailSize">Size</label>
                 <select id="detailSize">
@@ -559,423 +309,211 @@
                 </div>
               </div>
             </div>
-
-            <!-- Actions -->
-            <div class="detail-actions">
-              <button class="primary-btn" onclick="addDetailProductToCart()">
-                Add to Cart
-              </button>
-              <button
-                class="primary-btn"
-                onclick="buyDetailProduct()"
-                style="background: #dc2626"
-              >
-                Buy Now
-              </button>
-              <button
-                class="secondary-btn"
-                onclick="toggleDetailFavorite()"
-                id="favBtn"
-              >
+            <div class="prod-actions">
+              <button class="btn btn-primary" onclick="addDetailProductToCart()">Add to Cart</button>
+              <button class="btn btn-danger" onclick="buyDetailProduct()">Buy Now</button>
+              <button class="btn btn-secondary" onclick="toggleDetailFavorite()" id="favBtn">
                 <span class="material-symbols-outlined">favorite</span>
                 Add to Favorites
               </button>
             </div>
           </div>
         </div>
-
-        <!-- Reviews Section -->
-        <div class="product-detail-reviews">
+        <div class="prod-reviews">
           <h3>Reviews & Ratings</h3>
-
-          <!-- Write Review Form -->
           <div class="write-review">
             <h4>Leave a Review</h4>
-            <form
-              id="reviewForm"
-              onsubmit="
-                submitReview(event);
-                return false;
-              "
-              class="auth-form"
-            >
+            <form id="reviewForm" onsubmit="submitReview(event); return false;" class="form-auth">
               <div class="form-group">
                 <label>Rating</label>
                 <div class="rating-input" id="ratingInput">
-                  <button type="button" class="star-btn" onclick="setRating(1)">
-                    ★
-                  </button>
-                  <button type="button" class="star-btn" onclick="setRating(2)">
-                    ★
-                  </button>
-                  <button type="button" class="star-btn" onclick="setRating(3)">
-                    ★
-                  </button>
-                  <button type="button" class="star-btn" onclick="setRating(4)">
-                    ★
-                  </button>
-                  <button type="button" class="star-btn" onclick="setRating(5)">
-                    ★
-                  </button>
+                  <button type="button" class="star-btn" onclick="setRating(1)">★</button>
+                  <button type="button" class="star-btn" onclick="setRating(2)">★</button>
+                  <button type="button" class="star-btn" onclick="setRating(3)">★</button>
+                  <button type="button" class="star-btn" onclick="setRating(4)">★</button>
+                  <button type="button" class="star-btn" onclick="setRating(5)">★</button>
                 </div>
                 <input type="hidden" id="selectedRating" value="0" />
               </div>
-
               <div class="form-group">
                 <label for="reviewName">Name</label>
-                <input
-                  type="text"
-                  id="reviewName"
-                  placeholder="Your name"
-                  required
-                />
+                <input type="text" id="reviewName" placeholder="Your name" required />
               </div>
-
               <div class="form-group">
                 <label for="reviewComment">Review</label>
-                <textarea
-                  id="reviewComment"
-                  placeholder="Share your experience..."
-                  rows="4"
-                  required
-                ></textarea>
+                <textarea id="reviewComment" placeholder="Share your experience..." rows="4" required></textarea>
               </div>
-
-              <button type="submit" class="primary-btn">Submit Review</button>
+              <button type="submit" class="btn btn-primary">Submit Review</button>
             </form>
           </div>
-
-          <!-- Reviews List -->
-          <div class="reviews-list" id="reviewsList">
-            <!-- Reviews rendered by JS -->
-          </div>
-          <div class="no-reviews" id="noReviews">
-            No reviews yet. Be the first to review!
-          </div>
+          <div class="reviews-list" id="reviewsList"></div>
+          <div class="no-reviews" id="noReviews">No reviews yet. Be the first to review!</div>
         </div>
       </div>
     </div>
 
-    <!-- ================= CART SIDEBAR ================= -->
-    <div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
-    <aside class="cart-sidebar" id="cartSidebar">
-      <div class="cart-sidebar-header">
+    <!-- Cart Sidebar -->
+    <div class="overlay" id="cartOverlay" onclick="closeCart()"></div>
+    <aside class="sidebar" id="cartSidebar">
+      <div class="sidebar-head">
         <h2>Your Cart</h2>
-        <button
-          class="cart-close"
-          onclick="closeCart()"
-          aria-label="Close cart"
-        >
+        <button class="close-btn" onclick="closeCart()" aria-label="Close cart">
           <span class="material-symbols-outlined">close</span>
         </button>
       </div>
-      <div class="cart-items" id="cartItems">
-        <!-- Cart items rendered by JS -->
-      </div>
-      <div class="cart-empty" id="cartEmpty">Your cart is empty.</div>
+      <div class="cart-items" id="cartItems"></div>
+      <div class="empty-msg" id="cartEmpty">Your cart is empty.</div>
       <div class="cart-footer" id="cartFooter">
         <div class="cart-subtotal">
           <span>Subtotal</span>
           <span id="cartSubtotal">$0.00</span>
         </div>
-        <button class="primary-btn cart-checkout-btn" onclick="openCheckout()">
-          Checkout
-        </button>
+        <button class="btn btn-primary cart-checkout-btn" onclick="openCheckout()">Checkout</button>
       </div>
     </aside>
 
-    <!-- ================= FAVORITES SIDEBAR ================= -->
-    <div
-      class="favorites-overlay"
-      id="favoritesOverlay"
-      onclick="closeFavorites()"
-    ></div>
-    <aside class="favorites-sidebar" id="favoritesSidebar">
-      <div class="favorites-sidebar-header">
+    <!-- Favorites Sidebar -->
+    <div class="overlay" id="favoritesOverlay" onclick="closeFavorites()"></div>
+    <aside class="sidebar" id="favoritesSidebar">
+      <div class="sidebar-head">
         <h2>My Favorites</h2>
-        <button
-          class="favorites-close"
-          onclick="closeFavorites()"
-          aria-label="Close favorites"
-        >
+        <button class="close-btn" onclick="closeFavorites()" aria-label="Close favorites">
           <span class="material-symbols-outlined">close</span>
         </button>
       </div>
-      <div class="favorites-items" id="favoritesItems">
-        <!-- Favorites items rendered by JS -->
-      </div>
-      <div class="favorites-empty" id="favoritesEmpty">
-        No favorites yet. Start adding your favorites!
-      </div>
+      <div class="favorites-items" id="favoritesItems"></div>
+      <div class="empty-msg" id="favoritesEmpty">No favorites yet. Start adding your favorites!</div>
     </aside>
 
-    <!-- ================= CHECKOUT MODAL ================= -->
-    <div
-      class="checkout-overlay"
-      id="checkoutOverlay"
-      onclick="closeCheckout()"
-    ></div>
-    <div class="checkout-modal" id="checkoutModal">
-      <div class="checkout-modal-content">
-        <button
-          class="checkout-close"
-          onclick="closeCheckout()"
-          aria-label="Close"
-        >
+    <!-- Checkout Modal -->
+    <div class="overlay" id="checkoutOverlay" onclick="closeCheckout()"></div>
+    <div class="modal checkout-modal" id="checkoutModal">
+      <div class="modal-body">
+        <button class="close-btn" onclick="closeCheckout()" aria-label="Close">
           <span class="material-symbols-outlined">close</span>
         </button>
         <h2>Checkout</h2>
-
         <div class="checkout-sections">
-          <!-- Order Summary -->
           <div class="checkout-section">
             <h3>Order Summary</h3>
-            <div class="checkout-items" id="checkoutItems">
-              <!-- Items populated by JS -->
-            </div>
+            <div class="checkout-items" id="checkoutItems"></div>
             <div class="checkout-summary">
-              <div class="summary-row">
-                <span>Subtotal</span>
-                <span id="checkoutSubtotal">$0.00</span>
-              </div>
-              <div class="summary-row">
-                <span>Shipping</span>
-                <span id="checkoutShipping">$10.00</span>
-              </div>
-              <div class="summary-row total">
-                <span>Total</span>
-                <span id="checkoutTotal">$10.00</span>
-              </div>
+              <div class="summary-row"><span>Subtotal</span><span id="checkoutSubtotal">$0.00</span></div>
+              <div class="summary-row"><span>Shipping</span><span id="checkoutShipping">$10.00</span></div>
+              <div class="summary-row total"><span>Total</span><span id="checkoutTotal">$10.00</span></div>
             </div>
           </div>
-
-          <!-- Shipping Address -->
           <div class="checkout-section">
             <h3>Shipping Address</h3>
-            <form id="shippingForm" class="auth-form">
+            <form id="shippingForm" class="form-auth">
               <div class="form-group">
                 <label for="shippingName">Full Name</label>
-                <input
-                  type="text"
-                  id="shippingName"
-                  placeholder="John Doe"
-                  required
-                />
+                <input type="text" id="shippingName" placeholder="John Doe" required />
               </div>
               <div class="form-group">
                 <label for="shippingEmail">Email</label>
-                <input
-                  type="email"
-                  id="shippingEmail"
-                  placeholder="your@email.com"
-                  required
-                />
+                <input type="email" id="shippingEmail" placeholder="your@email.com" required />
               </div>
               <div class="form-group">
                 <label for="shippingPhone">Phone</label>
-                <input
-                  type="tel"
-                  id="shippingPhone"
-                  placeholder="+1 (555) 000-0000"
-                  required
-                />
+                <input type="tel" id="shippingPhone" placeholder="+1 (555) 000-0000" required />
               </div>
               <div class="form-group">
                 <label for="shippingAddress">Street Address</label>
-                <input
-                  type="text"
-                  id="shippingAddress"
-                  placeholder="123 Main Street"
-                  required
-                />
+                <input type="text" id="shippingAddress" placeholder="123 Main Street" required />
               </div>
               <div class="form-row">
                 <div class="form-group">
                   <label for="shippingCity">City</label>
-                  <input
-                    type="text"
-                    id="shippingCity"
-                    placeholder="New York"
-                    required
-                  />
+                  <input type="text" id="shippingCity" placeholder="New York" required />
                 </div>
                 <div class="form-group">
                   <label for="shippingState">State/Province</label>
-                  <input
-                    type="text"
-                    id="shippingState"
-                    placeholder="NY"
-                    required
-                  />
+                  <input type="text" id="shippingState" placeholder="NY" required />
                 </div>
               </div>
               <div class="form-row">
                 <div class="form-group">
                   <label for="shippingZip">ZIP/Postal Code</label>
-                  <input
-                    type="text"
-                    id="shippingZip"
-                    placeholder="10001"
-                    required
-                  />
+                  <input type="text" id="shippingZip" placeholder="10001" required />
                 </div>
                 <div class="form-group">
                   <label for="shippingCountry">Country</label>
-                  <input
-                    type="text"
-                    id="shippingCountry"
-                    placeholder="United States"
-                    required
-                  />
+                  <input type="text" id="shippingCountry" placeholder="United States" required />
                 </div>
               </div>
             </form>
           </div>
-
-          <!-- Payment -->
           <div class="checkout-section">
             <h3>Payment Method</h3>
-            <div id="paypal-button-container" style="margin-top: 20px"></div>
+            <div id="paypal-button-container"></div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- ================= AUTH MODAL ================= -->
-    <div class="auth-overlay" id="authOverlay" onclick="closeAuth()"></div>
-    <div class="auth-modal" id="authModal">
-      <div class="auth-modal-content">
-        <button class="auth-close" onclick="closeAuth()" aria-label="Close">
+    <!-- Auth Modal -->
+    <div class="overlay" id="authOverlay" onclick="closeAuth()"></div>
+    <div class="modal auth-modal" id="authModal">
+      <div class="modal-body">
+        <button class="close-btn" onclick="closeAuth()" aria-label="Close">
           <span class="material-symbols-outlined">close</span>
         </button>
 
-        <!-- LOGIN TAB -->
         <div class="auth-tab-content" id="loginTab">
           <h2>Login</h2>
-          <form
-            class="auth-form"
-            onsubmit="
-              handleLogin(event);
-              return false;
-            "
-          >
+          <form class="form-auth" onsubmit="handleLogin(event); return false;">
             <div class="form-group">
               <label for="loginEmail">Email</label>
-              <input
-                type="email"
-                id="loginEmail"
-                placeholder="your@email.com"
-                required
-              />
+              <input type="email" id="loginEmail" placeholder="your@email.com" required />
             </div>
             <div class="form-group">
               <label for="loginPassword">Password</label>
-              <input
-                type="password"
-                id="loginPassword"
-                placeholder="Enter password"
-                required
-              />
+              <input type="password" id="loginPassword" placeholder="Enter password" required />
             </div>
-            <button type="submit" class="primary-btn auth-btn">Login</button>
-            <div class="divider">
-              <span>OR</span>
-            </div>
-            <button
-              type="button"
-              class="google-btn"
-              onclick="signInWithGoogle()"
-            >
+            <button type="submit" class="btn btn-primary" style="width:100%">Login</button>
+            <div class="divider"><span>OR</span></div>
+            <button type="button" class="google-btn" onclick="signInWithGoogle()">
               <span class="material-symbols-outlined">language</span>
               Continue with Google
             </button>
             <p class="auth-toggle-text">
-              Don't have an account?
-              <a
-                href="#"
-                onclick="
-                  switchAuthTab('signup');
-                  return false;
-                "
-                >Sign Up</a
-              >
+              Don't have an account? <a href="#" onclick="switchAuthTab('signup'); return false;">Sign Up</a>
             </p>
           </form>
         </div>
 
-        <!-- SIGNUP TAB -->
         <div class="auth-tab-content hidden" id="signupTab">
           <h2>Create Account</h2>
-          <form
-            class="auth-form"
-            onsubmit="
-              handleSignup(event);
-              return false;
-            "
-          >
+          <form class="form-auth" onsubmit="handleSignup(event); return false;">
             <div class="form-group">
               <label for="signupName">Full Name</label>
-              <input
-                type="text"
-                id="signupName"
-                placeholder="John Doe"
-                required
-              />
+              <input type="text" id="signupName" placeholder="John Doe" required />
             </div>
             <div class="form-group">
               <label for="signupEmail">Email</label>
-              <input
-                type="email"
-                id="signupEmail"
-                placeholder="your@email.com"
-                required
-              />
+              <input type="email" id="signupEmail" placeholder="your@email.com" required />
             </div>
             <div class="form-group">
               <label for="signupPassword">Password</label>
-              <input
-                type="password"
-                id="signupPassword"
-                placeholder="Enter password"
-                required
-              />
+              <input type="password" id="signupPassword" placeholder="Enter password" required />
             </div>
             <div class="form-group">
               <label for="signupConfirm">Confirm Password</label>
-              <input
-                type="password"
-                id="signupConfirm"
-                placeholder="Confirm password"
-                required
-              />
+              <input type="password" id="signupConfirm" placeholder="Confirm password" required />
             </div>
-            <button type="submit" class="primary-btn auth-btn">Sign Up</button>
-            <div class="divider">
-              <span>OR</span>
-            </div>
-            <button
-              type="button"
-              class="google-btn"
-              onclick="signInWithGoogle()"
-            >
+            <button type="submit" class="btn btn-primary" style="width:100%">Sign Up</button>
+            <div class="divider"><span>OR</span></div>
+            <button type="button" class="google-btn" onclick="signInWithGoogle()">
               <span class="material-symbols-outlined">language</span>
               Continue with Google
             </button>
             <p class="auth-toggle-text">
-              Already have an account?
-              <a
-                href="#"
-                onclick="
-                  switchAuthTab('login');
-                  return false;
-                "
-                >Login</a
-              >
+              Already have an account? <a href="#" onclick="switchAuthTab('login'); return false;">Login</a>
             </p>
           </form>
         </div>
 
-        <!-- PROFILE TAB -->
         <div class="auth-tab-content hidden" id="profileTab">
           <h2>My Profile</h2>
           <div class="profile-info" id="profileInfo">
@@ -989,61 +527,32 @@
             </div>
           </div>
           <div class="profile-actions">
-            <button class="secondary-btn" onclick="openSettings()">
-              Settings
-            </button>
-            <button class="secondary-btn" onclick="handleLogout()">
-              Logout
-            </button>
+            <button class="btn btn-secondary" onclick="openSettings()">Settings</button>
+            <button class="btn btn-secondary" onclick="handleLogout()">Logout</button>
           </div>
         </div>
 
-        <!-- SETTINGS TAB -->
         <div class="auth-tab-content hidden" id="settingsTab">
           <h2>Settings</h2>
-          <form
-            class="auth-form"
-            onsubmit="
-              handleSettings(event);
-              return false;
-            "
-          >
+          <form class="form-auth" onsubmit="handleSettings(event); return false;">
             <div class="form-group">
               <label for="settingsName">Full Name</label>
               <input type="text" id="settingsName" placeholder="John Doe" />
             </div>
             <div class="form-group">
               <label for="settingsEmail">Email</label>
-              <input
-                type="email"
-                id="settingsEmail"
-                placeholder="your@email.com"
-              />
+              <input type="email" id="settingsEmail" placeholder="your@email.com" />
             </div>
             <div class="form-group">
               <label for="settingsPhone">Phone</label>
-              <input
-                type="tel"
-                id="settingsPhone"
-                placeholder="+1 (555) 000-0000"
-              />
+              <input type="tel" id="settingsPhone" placeholder="+1 (555) 000-0000" />
             </div>
             <div class="form-group checkbox">
               <input type="checkbox" id="settingsNotifications" checked />
-              <label for="settingsNotifications"
-                >Receive email notifications</label
-              >
+              <label for="settingsNotifications">Receive email notifications</label>
             </div>
-            <button type="submit" class="primary-btn auth-btn">
-              Save Changes
-            </button>
-            <button
-              type="button"
-              class="secondary-btn auth-btn"
-              onclick="switchAuthTab('profile')"
-            >
-              Back to Profile
-            </button>
+            <button type="submit" class="btn btn-primary" style="width:100%">Save Changes</button>
+            <button type="button" class="btn btn-secondary" style="width:100%" onclick="switchAuthTab('profile')">Back to Profile</button>
           </form>
         </div>
       </div>
