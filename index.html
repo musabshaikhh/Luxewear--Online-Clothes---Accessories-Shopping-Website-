@@ -71,14 +71,19 @@
             </button>
           </div>
         </div>
-        <span class="nav-icon" onclick="toggleFavorites()" title="Favorites"
+        <span
+          class="material-symbols-outlined nav-icon"
+          onclick="toggleFavorites()"
+          title="Favorites"
           >favorite</span
         >
         <div class="cart-icon" onclick="toggleCart()">
-          <span class="nav-icon">shopping_bag</span>
+          <span class="material-symbols-outlined nav-icon">shopping_bag</span>
           <span class="cart-count" id="cartCount">0</span>
         </div>
-        <span class="nav-icon" onclick="openAuth()">person</span>
+        <span class="material-symbols-outlined nav-icon" onclick="openAuth()"
+          >person</span
+        >
       </div>
     </nav>
 
@@ -499,6 +504,23 @@
           <span class="material-symbols-outlined">close</span>
         </button>
 
+        <div class="auth-tabs" id="authTabs">
+          <div
+            class="auth-tab active"
+            id="loginTabBtn"
+            onclick="switchAuthTab('login')"
+          >
+            Login
+          </div>
+          <div
+            class="auth-tab"
+            id="signupTabBtn"
+            onclick="switchAuthTab('signup')"
+          >
+            Sign Up
+          </div>
+        </div>
+
         <div class="auth-tab-content" id="loginTab">
           <h2>Login</h2>
           <form
@@ -689,6 +711,9 @@
         </div>
       </div>
     </div>
+
+    <!-- Notification Container -->
+    <div id="notificationContainer" class="notification-container"></div>
 
     <!-- Scripts - Load as ES6 module -->
     <script type="module" src="js/main.js"></script>

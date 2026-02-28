@@ -1,4 +1,5 @@
 import { showNotification } from './utils.js';
+import { addToCart } from './cart.js';
 
 // ================= FAVORITES SIDEBAR =================
 const FAVORITES_KEY = 'luxewear_favorites';
@@ -60,6 +61,11 @@ function renderFavorites() {
       <div class="favorite-item-details">
         <div class="favorite-item-name">${item.name || 'Product'}</div>
         <div class="favorite-item-price">$${(item.price || 0).toFixed(2)}</div>
+        <div class="favorite-item-actions">
+           <button type="button" class="btn btn-fav-add-cart" onclick="window.addFavoriteToCart(${index})">
+             Add to Cart
+           </button>
+        </div>
       </div>
       <button type="button" class="favorite-item-remove" onclick="window.removeFromFavorites(${index})" aria-label="Remove from favorites">
         <span class="material-symbols-outlined">delete</span>
@@ -67,6 +73,14 @@ function renderFavorites() {
     `;
     container.appendChild(div);
   });
+}
+
+function addFavoriteToCart(index) {
+  const favorites = getFavorites();
+  const item = favorites[index];
+  if (!item) return;
+
+  addToCart(item);
 }
 
 function removeFromFavorites(index) {
@@ -130,5 +144,6 @@ export {
   renderFavorites,
   removeFromFavorites,
   addToFavorites,
-  addProductToFavorites
+  addProductToFavorites,
+  addFavoriteToCart
 };

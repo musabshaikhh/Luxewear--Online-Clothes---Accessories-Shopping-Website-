@@ -49,7 +49,14 @@ function switchAuthTab(tabName) {
   tabs.forEach(tab => tab.classList.add('hidden'));
   const activeTab = document.getElementById(tabName + 'Tab');
   if (activeTab) activeTab.classList.remove('hidden');
+
+  // Handle tab button active state
+  const tabBtns = document.querySelectorAll('.auth-tab');
+  tabBtns.forEach(btn => btn.classList.remove('active'));
+  const activeBtn = document.getElementById(tabName + 'TabBtn');
+  if (activeBtn) activeBtn.classList.add('active');
 }
+
 
 function handleLogin(event) {
   event.preventDefault();

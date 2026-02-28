@@ -195,68 +195,7 @@ function getShopItems(category) {
   return shopItems[category] || [];
 }
 
-// Function to get a single item by ID
-function getShopItemById(id) {
-  for (const category in shopItems) {
-    const item = shopItems[category].find(item => item.id === id);
-    if (item) return item;
-  }
-  return null;
-}
-
-// Function to search items across all categories
-function searchShopItems(query) {
-  const results = [];
-  const lowerQuery = query.toLowerCase();
-
-  for (const category in shopItems) {
-    shopItems[category].forEach(item => {
-      if (
-        item.name.toLowerCase().includes(lowerQuery) ||
-        item.description.toLowerCase().includes(lowerQuery) ||
-        item.category.toLowerCase().includes(lowerQuery)
-      ) {
-        results.push(item);
-      }
-    });
-  }
-
-  return results;
-}
-
-// Function to filter items by price range
-function filterShopItemsByPrice(category, minPrice, maxPrice) {
-  const items = getShopItems(category);
-  return items.filter(item => item.price >= minPrice && item.price <= maxPrice);
-}
-
-// Function to sort items
-function sortShopItems(items, sortBy = 'name') {
-  const sorted = [...items];
-
-  switch (sortBy) {
-    case 'price-low':
-      sorted.sort((a, b) => a.price - b.price);
-      break;
-    case 'price-high':
-      sorted.sort((a, b) => b.price - a.price);
-      break;
-    case 'rating':
-      sorted.sort((a, b) => b.rating - a.rating);
-      break;
-    case 'name':
-    default:
-      sorted.sort((a, b) => a.name.localeCompare(b.name));
-  }
-
-  return sorted;
-}
-
 export {
   shopItems,
-  getShopItems,
-  getShopItemById,
-  searchShopItems,
-  filterShopItemsByPrice,
-  sortShopItems
+  getShopItems
 };

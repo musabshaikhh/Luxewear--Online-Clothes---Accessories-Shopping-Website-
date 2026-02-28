@@ -2,6 +2,8 @@
 
 // Import all modules
 import { showNotification, revealOnScroll } from './utils.js';
+import { firebaseInitialized } from './firebase-config.js';
+
 import {
   getCart,
   saveCart,
@@ -17,6 +19,12 @@ import {
   buyProduct
 } from './cart.js';
 import {
+  renderProductGrid,
+  createProductCardHTML,
+  createStarsHTML,
+  renderCategoryProducts
+} from './shop-products.js';
+import {
   getFavorites,
   saveFavorites,
   openFavorites,
@@ -24,7 +32,8 @@ import {
   toggleFavorites,
   renderFavorites,
   removeFromFavorites,
-  addProductToFavorites
+  addProductToFavorites,
+  addFavoriteToCart
 } from './favorites.js';
 import {
   getUser,
@@ -83,6 +92,7 @@ window.openFavorites = openFavorites;
 window.closeFavorites = closeFavorites;
 window.removeFromFavorites = removeFromFavorites;
 window.addProductToFavorites = addProductToFavorites;
+window.addFavoriteToCart = addFavoriteToCart;
 window.openAuth = openAuth;
 window.closeAuth = closeAuth;
 window.switchAuthTab = switchAuthTab;
@@ -116,6 +126,8 @@ window.saveUser = saveUser;
 window.showNotification = showNotification;
 window.updateRatingStars = updateRatingStars;
 window.initFavoriteButtons = initFavoriteButtons;
+window.firebaseInitialized = firebaseInitialized;
+
 
 // Document-level event listeners for closing modals on overlay click
 document.addEventListener('click', function(e) {
