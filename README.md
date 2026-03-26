@@ -49,4 +49,3 @@ A modern, feature-rich e-commerce web application for premium fashion shopping. 
 - **Notification System**: Real-time user feedback and notifications
 - **Smooth Transitions**: CSS animations and transitions for enhanced UX
 
-## 🏗️ Project Structure
